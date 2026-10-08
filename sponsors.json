@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "sponsors": [
+    {
+      "id": "promo_disponible",
+      "active": true,
+      "name": "Espacio publicitario para Patrocinador",
+      "tagline": "Anuncia aquí tu emprendimiento, librería, servicio u obra y llega a miles de fieles devotos.",
+      "action_text": "Patrocinar aquí",
+      "target_url": "https://pcloayza3.github.io/santo-rosario/",
+      "badge": "ESPACIO DISPONIBLE"
+    }
+  ]
+}
