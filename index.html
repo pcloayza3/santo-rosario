@@ -216,17 +216,26 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      width: fit-content;
+      margin: 0 auto;
     }
     #qrcode {
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 8px;
+      width: 170px;
+      height: 170px;
+      margin: 0 auto;
     }
     #qrcode canvas, #qrcode img {
-      max-width: 180px;
-      height: auto;
+      width: 100% !important;
+      max-width: 170px !important;
+      height: auto !important;
+      aspect-ratio: 1 / 1;
       border-radius: 8px;
+      display: block;
+      margin: 0 auto;
     }
     .qr-scan-label {
       font-size: 0.78rem;
@@ -235,6 +244,8 @@
       margin-top: 8px;
       text-transform: uppercase;
       letter-spacing: 0.8px;
+      display: block;
+      text-align: center;
     }
     .qr-info-content h3 {
       font-size: 1.55rem;
@@ -598,6 +609,192 @@
       font-size: 0.88rem;
     }
 
+    /* Banner Evangelizador / Regalo Devocional */
+    .gift-banner {
+      background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
+      border: 1.5px solid rgba(212, 175, 55, 0.5);
+      border-radius: var(--radius-lg);
+      padding: 26px 30px;
+      margin-bottom: 34px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      box-shadow: 0 8px 20px rgba(198, 139, 35, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+    .gift-banner-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: var(--accent);
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+    }
+    .gift-banner-content h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.35rem;
+      color: #78350F;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .gift-banner-content p {
+      color: #92400E;
+      font-size: 0.98rem;
+      line-height: 1.55;
+    }
+    .gift-banner-content strong {
+      color: #78350F;
+    }
+
+    /* Icono Mac */
+    .icon-mac { background: #F3F4F6; color: #111827; }
+
+    /* Sección de Donaciones */
+    .donation-section {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 44px 36px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 60px;
+    }
+    .donation-intro {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 36px;
+    }
+    .donation-intro h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.1rem;
+      color: #0B192C;
+      margin-bottom: 8px;
+    }
+    .donation-intro p {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+    .donation-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+    }
+    .donation-card {
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      background: #FAFAFA;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .donation-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      border-color: #CBD5E1;
+    }
+    .donation-card-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .donation-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+    }
+    .icon-qr-bo { background: #FEF3C7; color: #D97706; }
+    .icon-paypal { background: #E0F2FE; color: #0284C7; }
+    .donation-card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #0F172A;
+    }
+    .donation-card-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .qr-placeholder-box {
+      background: white;
+      border: 2px dashed #CBD5E1;
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 180px;
+    }
+    .qr-placeholder-box i {
+      font-size: 3rem;
+      color: #94A3B8;
+      margin-bottom: 10px;
+    }
+    .qr-placeholder-text {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      max-width: 260px;
+      line-height: 1.4;
+    }
+    .donation-details-list {
+      background: white;
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 18px;
+      font-size: 0.85rem;
+      border: 1px solid var(--border);
+    }
+    .donation-detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+      border-bottom: 1px dashed #F1F5F9;
+    }
+    .donation-detail-row:last-child {
+      border-bottom: none;
+    }
+    .donation-detail-label {
+      color: var(--text-muted);
+    }
+    .donation-detail-val {
+      font-weight: 700;
+      color: #0F172A;
+    }
+    .btn-paypal {
+      background: #0070BA;
+      color: white;
+      border-radius: var(--radius-sm);
+      padding: 13px 20px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: background 0.2s, transform 0.1s;
+      margin-top: auto;
+    }
+    .btn-paypal:hover {
+      background: #005EA6;
+      transform: translateY(-1px);
+    }
+
     /* Toast Notification */
     .toast {
       position: fixed;
@@ -620,20 +817,53 @@
       .qr-banner-card {
         grid-template-columns: 1fr;
         text-align: center;
-        padding: 24px;
+        padding: 20px 16px;
         gap: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%;
+      }
+      .qr-box-wrapper {
+        margin: 0 auto !important;
+        max-width: 220px;
+        width: 100%;
+        padding: 14px;
+        box-sizing: border-box;
+      }
+      #qrcode {
+        width: 160px;
+        height: 160px;
+        margin: 0 auto;
+        padding: 0;
+      }
+      #qrcode canvas, #qrcode img {
+        max-width: 160px !important;
+        margin: 0 auto;
       }
       .qr-link-box {
         margin: 0 auto 16px;
+        width: 100%;
+        box-sizing: border-box;
       }
       .qr-actions {
         justify-content: center;
       }
       .hero-title {
-        font-size: 2.2rem;
+        font-size: 2.1rem;
       }
       .docs-section {
-        padding: 26px;
+        padding: 24px 18px;
+      }
+      .gift-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 22px 18px;
+      }
+      .gift-banner-icon {
+        margin: 0 auto;
+      }
+      .donation-section {
+        padding: 26px 18px;
       }
     }
   </style>
@@ -653,6 +883,7 @@
       <nav class="nav-links">
         <a href="#descarga" class="nav-link">Descargas</a>
         <a href="#guia" class="nav-link">Cómo Usar</a>
+        <a href="#donaciones" class="nav-link">Donaciones</a>
         <a href="#autor" class="nav-link">Autor</a>
         <a href="app/" class="btn-nav" target="_blank">
           <i class="fa-solid fa-play"></i> Rezar Online
@@ -674,6 +905,23 @@
       <p class="hero-subtitle">
         Una experiencia contemplativa, interactiva y pastoral con el rosario perimetral completo, lecturas bíblicas, letanías lauretanas y soporte en tres idiomas.
       </p>
+
+      <!-- BANNER DE EVANGELIZACIÓN Y REGALO DEVOCIONAL -->
+      <div class="gift-banner">
+        <div class="gift-banner-icon">
+          <i class="fa-solid fa-gift"></i>
+        </div>
+        <div class="gift-banner-content">
+          <h3>
+            <i class="fa-solid fa-hands-praying"></i> ¡Te regalamos un Rosario Virtual para tu vida y tu hogar!
+          </h3>
+          <p>
+            Si nunca has rezado el Santo Rosario o sientes que no sabes cómo hacerlo, no te preocupes: 
+            con esta aplicación <strong>serás todo un maestro en el camino de la oración</strong>. Te guiamos paso a paso, perla por perla, misterio por misterio. 
+            Solo necesitamos tu <strong>voluntad</strong> y tu <strong>fe</strong>. ¡Comienza hoy mismo!
+          </p>
+        </div>
+      </div>
 
       <!-- BANNER DEL CÓDIGO QR GIGANTE Y COMPARTIR RÁPIDO -->
       <div class="qr-banner-card">
@@ -858,6 +1106,33 @@
           </a>
         </div>
 
+        <!-- 5. Mac (macOS) -->
+        <div class="platform-card">
+          <div class="platform-header">
+            <div class="platform-icon icon-mac">
+              <i class="fa-brands fa-apple"></i>
+            </div>
+            <div>
+              <h3 class="platform-title">Mac (macOS)</h3>
+              <small style="color: var(--text-muted);">MacBook, iMac, Mac mini</small>
+            </div>
+          </div>
+          <p class="platform-desc">
+            Instalable en macOS vía Safari o Chrome como aplicación nativa de escritorio independiente en tu Dock y Launchpad.
+          </p>
+          <div class="platform-steps">
+            <strong>Cómo instalar en Mac:</strong>
+            <ol>
+              <li>En Safari (macOS Sonoma o posterior), abre la aplicación web y ve a <strong>Archivo → Agregar al Dock</strong>.</li>
+              <li>En Chrome para Mac, haz clic en el icono <strong>"Instalar aplicación"</strong> en la barra de direcciones.</li>
+              <li>¡Listo! Se abrirá como app de ventana independiente en tu Dock.</li>
+            </ol>
+          </div>
+          <a href="app/" target="_blank" class="platform-btn secondary">
+            <i class="fa-solid fa-desktop"></i> Abrir en Mac / Instalar
+          </a>
+        </div>
+
         <!-- 5. Linux -->
         <div class="platform-card">
           <div class="platform-header">
@@ -1001,6 +1276,102 @@
               Al inicio en la Santa Cruz, se invita al orante a presentar un momento de silencio y oración por la Iglesia, las familias y las intenciones personales del corazón.
             </p>
           </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Sección de Donaciones y Apoyo al Proyecto -->
+    <section id="donaciones" class="donation-section">
+      <div class="donation-intro">
+        <div class="hero-pill" style="margin-bottom: 12px;">
+          <i class="fa-solid fa-heart" style="color: #E11D48;"></i> Apoya esta Misión de Evangelización
+        </div>
+        <h2>Colabora con el Santo Rosario Universal</h2>
+        <p>
+          Esta aplicación es 100% gratuita y sin anuncios comerciales. Si este proyecto ha sido de bendición para tu vida y deseas apoyarnos para continuar desarrollando mejoras, servidores y difusión pastoral, cualquier ofrenda voluntaria es recibida con inmensa gratitud.
+        </p>
+      </div>
+
+      <div class="donation-cards">
+
+        <!-- Opción 1: Bolivia (QR Simple / Transferencia Bancaria) -->
+        <div class="donation-card">
+          <div class="donation-card-header">
+            <div class="donation-icon icon-qr-bo">
+              <i class="fa-solid fa-qrcode"></i>
+            </div>
+            <div>
+              <h3 class="donation-card-title">En Bolivia (QR Pago Simple)</h3>
+              <p class="donation-card-subtitle">Transferencia desde cualquier banco boliviano</p>
+            </div>
+          </div>
+
+          <!-- Cuadro de QR para Bolivia (Listo para reemplazar con la imagen definitiva) -->
+          <div class="qr-placeholder-box">
+            <i class="fa-solid fa-money-bill-transfer"></i>
+            <div class="qr-placeholder-text">
+              <strong>QR Pago Simple Bolivia</strong><br>
+              Escanea desde la app de tu banco (BNB, BCP, Banco Unión, Mercantil Santa Cruz, Bisa, Fassil, Fie, etc.)
+            </div>
+          </div>
+
+          <div class="donation-details-list">
+            <div class="donation-detail-row">
+              <span class="donation-detail-label">Beneficiario:</span>
+              <span class="donation-detail-val">Paulo Cesar Loayza Carrasco</span>
+            </div>
+            <div class="donation-detail-row">
+              <span class="donation-detail-label">País:</span>
+              <span class="donation-detail-val">Bolivia 🇧🇴</span>
+            </div>
+            <div class="donation-detail-row">
+              <span class="donation-detail-label">Destino:</span>
+              <span class="donation-detail-val">Mantenimiento y Difusión</span>
+            </div>
+          </div>
+
+          <p style="font-size: 0.82rem; color: var(--text-muted); text-align: center; margin-top: auto;">
+            <i class="fa-solid fa-shield-heart" style="color: #1565C0;"></i> Transferencia interbancaria instantánea sin comisiones bancarias.
+          </p>
+        </div>
+
+        <!-- Opción 2: Todo el Mundo (PayPal) -->
+        <div class="donation-card">
+          <div class="donation-card-header">
+            <div class="donation-icon icon-paypal">
+              <i class="fa-brands fa-paypal"></i>
+            </div>
+            <div>
+              <h3 class="donation-card-title">Internacional (PayPal)</h3>
+              <p class="donation-card-subtitle">Desde cualquier país con tarjeta o saldo PayPal</p>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 20px; font-size: 0.92rem; color: var(--text-muted); line-height: 1.6;">
+            <p>
+              Puedes realizar tu aporte de manera segura y confidencial utilizando tu cuenta de <strong>PayPal</strong> o cualquier tarjeta de crédito/débito internacional (Visa, Mastercard, American Express).
+            </p>
+          </div>
+
+          <div class="donation-details-list">
+            <div class="donation-detail-row">
+              <span class="donation-detail-label">Plataforma:</span>
+              <span class="donation-detail-val">PayPal Oficial 🌎</span>
+            </div>
+            <div class="donation-detail-row">
+              <span class="donation-detail-label">Moneda:</span>
+              <span class="donation-detail-val">USD / EUR / Moneda local</span>
+            </div>
+            <div class="donation-detail-row">
+              <span class="donation-detail-label">Seguridad:</span>
+              <span class="donation-detail-val">Protección al donante</span>
+            </div>
+          </div>
+
+          <a href="https://www.paypal.com/donate/?hosted_button_id=TU_ID_AQUI" target="_blank" class="btn-paypal">
+            <i class="fa-brands fa-paypal"></i> Donar con PayPal
+          </a>
         </div>
 
       </div>
