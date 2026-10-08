@@ -1,0 +1,108 @@
+{
+  "rosary_types": [
+    {
+      "id": "santo_rosario_mariano",
+      "name": "Santo Rosario Tradicional",
+      "description": "Rosario Mariano tradicional con los 4 grupos de misterios",
+      "bead_style_preset": "maria_blanco",
+      "category": "mariano"
+    },
+    {
+      "id": "rosario_senor_milagros",
+      "name": "Rosario al Señor de los Milagros",
+      "description": "Devoción al Cristo Moreno con jaculatorias de desagravio y petición",
+      "bead_style_preset": "morado",
+      "category": "cristologico"
+    },
+    {
+      "id": "coronilla_divina_misericordia",
+      "name": "Coronilla de la Divina Misericordia",
+      "description": "Orada tradicionalmente a las 3:00 PM con las cuentas del rosario",
+      "bead_style_preset": "marfil",
+      "category": "cristologico"
+    }
+  ],
+  "bead_colors": [
+    {"id": "blanco", "name": "Blanco Puro (María)", "hex": "#F8F9FA", "borderColor": "#B0BEC5"},
+    {"id": "negro", "name": "Negro Ébano", "hex": "#1E1E24", "borderColor": "#424242"},
+    {"id": "morado", "name": "Morado Nazareno (Sr. de los Milagros)", "hex": "#5E2750", "borderColor": "#7E3A6D"},
+    {"id": "cafe", "name": "Café Carmelo (Madera)", "hex": "#6F4E37", "borderColor": "#8B5A2B"},
+    {"id": "plata", "name": "Plata Pulida", "hex": "#D1D5DB", "borderColor": "#9CA3AF"},
+    {"id": "oro", "name": "Oro Sagrado", "hex": "#E5A93C", "borderColor": "#C68B23"},
+    {"id": "marfil", "name": "Marfil Antiguo", "hex": "#FFFFF0", "borderColor": "#DCD7C9"}
+  ],
+  "link_styles": [
+    {"id": "metalico", "name": "Eslabones Metálicos", "type": "chain"},
+    {"id": "hilo", "name": "Cordón / Hilo Trenzado", "type": "thread"}
+  ],
+  "link_colors": [
+    {"id": "oro", "name": "Dorado", "hex": "#C68B23"},
+    {"id": "plata", "name": "Plateado", "hex": "#9E9E9E"},
+    {"id": "bronce", "name": "Bronce / Cobre", "hex": "#8C6239"},
+    {"id": "negro", "name": "Negro", "hex": "#212121"},
+    {"id": "marron", "name": "Marrón Hilo", "hex": "#5D4037"},
+    {"id": "rojo", "name": "Rojo Litúrgico", "hex": "#B71C1C"},
+    {"id": "blanco", "name": "Blanco Hilo", "hex": "#EEEEEE"}
+  ],
+  "mysteries": [
+    {
+      "id": "gozosos",
+      "name": "Misterios Gozosos",
+      "days": [1, 6],
+      "days_label": "Lunes y Sábados",
+      "items": [
+        "1º La Encarnación del Hijo de Dios",
+        "2º La Visitación de Nuestra Señora a Santa Isabel",
+        "3º El Nacimiento del Hijo de Dios en Belén",
+        "4º La Purificación de la Virgen y Presentación de Jesús",
+        "5º El Niño Jesús perdido y hallado en el Templo"
+      ]
+    },
+    {
+      "id": "dolorosos",
+      "name": "Misterios Dolorosos",
+      "days": [2, 5],
+      "days_label": "Martes y Viernes",
+      "items": [
+        "1º La Agonía y Oración de Jesús en el Huerto",
+        "2º La Flagelación del Señor en la columna",
+        "3º La Coronación de Espinas",
+        "4º Jesús cargando la Cruz camino al Calvario",
+        "5º La Crucifixión y Muerte de Nuestro Señor Jesucristo"
+      ]
+    },
+    {
+      "id": "gloriosos",
+      "name": "Misterios Gloriosos",
+      "days": [3, 7],
+      "days_label": "Miércoles y Domingos",
+      "items": [
+        "1º La Resurrección del Señor",
+        "2º La Ascensión del Señor a los Cielos",
+        "3º La Venida del Espíritu Santo sobre los Apóstoles",
+        "4º La Asunción de la Virgen María en cuerpo y alma",
+        "5º La Coronación de María Santísima como Reina universal"
+      ]
+    },
+    {
+      "id": "luminosos",
+      "name": "Misterios Luminosos",
+      "days": [4],
+      "days_label": "Jueves",
+      "items": [
+        "1º El Bautismo de Jesús en el Río Jordán",
+        "2º La Autorrevelación en las Bodas de Caná",
+        "3º El Anuncio del Reino de Dios invitando a la conversión",
+        "4º La Transfiguración de Jesús en el Monte Tabor",
+        "5º La Institución de la Eucaristía en la Última Cena"
+      ]
+    }
+  ],
+  "senor_milagros_mysteries": [
+    "1º Jesús es condenado a muerte",
+    "2º Jesús carga con la pesada Cruz",
+    "3º Jesús consuela a las santas mujeres de Jerusalén",
+    "4º Jesús es clavado y expuesto en la Cruz",
+    "5º Jesús muere en la Cruz por la redención del mundo"
+  ]
+}
