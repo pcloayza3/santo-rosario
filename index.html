@@ -795,6 +795,230 @@
       transform: translateY(-1px);
     }
 
+    /* Sección de Comentarios y Testimonios */
+    .comments-section {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 44px 36px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 60px;
+    }
+    .comments-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .comments-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: #0B192C;
+    }
+    .btn-admin-mode {
+      background: #F1F5F9;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .btn-admin-mode:hover {
+      background: #E2E8F0;
+      color: #0F172A;
+    }
+    .btn-admin-mode.active {
+      background: #FEF2F2;
+      color: #DC2626;
+      border-color: #F87171;
+    }
+    .comment-form-card {
+      background: #F8FAFC;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-bottom: 32px;
+    }
+    .comment-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+    .form-control {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+      background: white;
+      box-sizing: border-box;
+    }
+    .form-control:focus {
+      border-color: var(--primary);
+    }
+    textarea.form-control {
+      resize: vertical;
+      min-height: 85px;
+    }
+    .btn-submit-comment {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 11px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+    .btn-submit-comment:hover {
+      background: var(--primary-dark);
+    }
+    .comments-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .comment-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      background: white;
+      position: relative;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .comment-card:hover {
+      box-shadow: var(--shadow-sm);
+    }
+    .comment-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .comment-author-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .comment-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.95rem;
+    }
+    .comment-name {
+      font-weight: 700;
+      font-size: 0.98rem;
+      color: #0F172A;
+    }
+    .comment-country {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .comment-date {
+      font-size: 0.78rem;
+      color: #94A3B8;
+    }
+    .comment-body {
+      font-size: 0.92rem;
+      color: #334155;
+      line-height: 1.55;
+    }
+    .btn-delete-comment {
+      display: none;
+      background: #FEE2E2;
+      color: #DC2626;
+      border: 1px solid #FCA5A5;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      align-items: center;
+      gap: 4px;
+      transition: background 0.15s;
+    }
+    .btn-delete-comment:hover {
+      background: #EF4444;
+      color: white;
+    }
+    .admin-active .btn-delete-comment {
+      display: inline-flex;
+    }
+
+    /* Modal de Clave de Administrador */
+    .admin-modal-backdrop {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .admin-modal-card {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 28px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+    }
+    .admin-modal-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      color: #0F172A;
+    }
+    .admin-modal-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .admin-modal-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
     /* Toast Notification */
     .toast {
       position: fixed;
@@ -884,6 +1108,7 @@
         <a href="#descarga" class="nav-link">Descargas</a>
         <a href="#guia" class="nav-link">Cómo Usar</a>
         <a href="#donaciones" class="nav-link">Donaciones</a>
+        <a href="#comentarios" class="nav-link">Comentarios</a>
         <a href="#autor" class="nav-link">Autor</a>
         <a href="app/" class="btn-nav" target="_blank">
           <i class="fa-solid fa-play"></i> Rezar Online
@@ -946,7 +1171,7 @@
           </div>
 
           <div class="qr-actions">
-            <a href="https://api.whatsapp.com/send?text=%C2%A1Descarga%20el%20Santo%20Rosario%20Universal!%20Reza%20el%20rosario%20interactivo%20en%20tu%20celular%20o%20computadora:%20https://pcloayza3.github.io/santo-rosario/" 
+            <a href="https://api.whatsapp.com/send?text=%C2%A1Te%20regalamos%20un%20Rosario%20Virtual!%20%F0%9F%99%8F%E2%9C%A8%0A%0ASi%20nunca%20has%20rezado%20el%20Santo%20Rosario%20o%20no%20sabes%20c%C3%B3mo%20hacerlo%2C%20con%20esta%20aplicaci%C3%B3n%20ser%C3%A1s%20todo%20un%20maestro.%20Solo%20necesitamos%20tu%20voluntad%20y%20tu%20fe.%0A%0AIngresa%20y%20descarga%20gratis%20aqu%C3%AD%3A%0Ahttps%3A%2F%2Fpcloayza3.github.io%2Fsanto-rosario%2F" 
                target="_blank" class="btn-share btn-share-whatsapp">
               <i class="fa-brands fa-whatsapp"></i> Compartir en WhatsApp
             </a>
@@ -995,9 +1220,36 @@
 
       <div class="platforms-grid">
 
-        <!-- 1. Android Móvil / Tablet -->
+        <!-- 1. Web en Cualquier Navegador (ACCESO INMEDIATO SIN DESCARGAS) -->
         <div class="platform-card featured">
-          <span class="card-badge badge-primary">Recomendado</span>
+          <span class="card-badge badge-primary">Acceso Inmediato</span>
+          <div class="platform-header">
+            <div class="platform-icon icon-web">
+              <i class="fa-solid fa-globe"></i>
+            </div>
+            <div>
+              <h3 class="platform-title">Web en Cualquier Navegador</h3>
+              <small style="color: var(--text-muted);">Sin descargas ni instalaciones • Carga al instante</small>
+            </div>
+          </div>
+          <p class="platform-desc">
+            Accede al rezo en vivo directamente desde cualquier navegador (Chrome, Safari, Edge, Firefox) en cualquier celular, computadora o tablet sin ocupar memoria.
+          </p>
+          <div class="platform-steps">
+            <strong>Acceso directo:</strong>
+            <ol>
+              <li>Toca el botón "Rezar Ahora en Línea".</li>
+              <li>Comienza a rezar de inmediato con todas las perlas y lecturas.</li>
+            </ol>
+          </div>
+          <a href="app/" target="_blank" class="platform-btn primary">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> Rezar Ahora en Línea
+          </a>
+        </div>
+
+        <!-- 2. Android Móvil / Tablet -->
+        <div class="platform-card">
+          <span class="card-badge badge-gold">Funciona Offline</span>
           <div class="platform-header">
             <div class="platform-icon icon-android">
               <i class="fa-brands fa-android"></i>
@@ -1018,36 +1270,8 @@
               <li>Si tu móvil lo solicita, permite instalar desde esta fuente.</li>
             </ol>
           </div>
-          <a href="SantoRosario.apk" download="SantoRosario.apk" class="platform-btn primary">
-            <i class="fa-solid fa-download"></i> Descargar APK para Android
-          </a>
-        </div>
-
-        <!-- 2. Android TV / Smart TV -->
-        <div class="platform-card">
-          <span class="card-badge badge-gold">Para Pantalla Grande</span>
-          <div class="platform-header">
-            <div class="platform-icon icon-tv">
-              <i class="fa-solid fa-tv"></i>
-            </div>
-            <div>
-              <h3 class="platform-title">Android TV & Google TV</h3>
-              <small style="color: var(--text-muted);">Televisores Sony, TCL, Xiaomi TV, Chromecast</small>
-            </div>
-          </div>
-          <p class="platform-desc">
-            Reza el Santo Rosario con tu familia en el televisor de la sala con tipografía grande y alta visibilidad.
-          </p>
-          <div class="platform-steps">
-            <strong>Instalación en tu TV:</strong>
-            <ol>
-              <li>En tu TV, abre la app <em>Downloader</em> e ingresa este enlace para bajar el APK.</li>
-              <li>O copia el archivo <code>SantoRosario.apk</code> a una memoria USB y conéctala al televisor.</li>
-              <li>Abre con un explorador de archivos e instala.</li>
-            </ol>
-          </div>
           <a href="SantoRosario.apk" download="SantoRosario.apk" class="platform-btn secondary">
-            <i class="fa-solid fa-download"></i> Descargar APK para TV
+            <i class="fa-solid fa-download"></i> Descargar APK para Android
           </a>
         </div>
 
@@ -1079,7 +1303,34 @@
           </a>
         </div>
 
-        <!-- 4. Windows PC -->
+        <!-- 4. Android TV / Smart TV -->
+        <div class="platform-card">
+          <div class="platform-header">
+            <div class="platform-icon icon-tv">
+              <i class="fa-solid fa-tv"></i>
+            </div>
+            <div>
+              <h3 class="platform-title">Android TV & Google TV</h3>
+              <small style="color: var(--text-muted);">Televisores Sony, TCL, Xiaomi TV, Chromecast</small>
+            </div>
+          </div>
+          <p class="platform-desc">
+            Reza el Santo Rosario con tu familia en el televisor de la sala con tipografía grande y alta visibilidad.
+          </p>
+          <div class="platform-steps">
+            <strong>Instalación en tu TV:</strong>
+            <ol>
+              <li>En tu TV, abre la app <em>Downloader</em> e ingresa este enlace para bajar el APK.</li>
+              <li>O copia el archivo <code>SantoRosario.apk</code> a una memoria USB y conéctala al televisor.</li>
+              <li>Abre con un explorador de archivos e instala.</li>
+            </ol>
+          </div>
+          <a href="SantoRosario.apk" download="SantoRosario.apk" class="platform-btn secondary">
+            <i class="fa-solid fa-download"></i> Descargar APK para TV
+          </a>
+        </div>
+
+        <!-- 5. Windows PC -->
         <div class="platform-card">
           <div class="platform-header">
             <div class="platform-icon icon-windows">
@@ -1106,7 +1357,7 @@
           </a>
         </div>
 
-        <!-- 5. Mac (macOS) -->
+        <!-- 6. Mac (macOS) -->
         <div class="platform-card">
           <div class="platform-header">
             <div class="platform-icon icon-mac">
@@ -1133,7 +1384,7 @@
           </a>
         </div>
 
-        <!-- 5. Linux -->
+        <!-- 7. Linux -->
         <div class="platform-card">
           <div class="platform-header">
             <div class="platform-icon icon-linux">
@@ -1157,32 +1408,6 @@
           </div>
           <a href="app/" target="_blank" class="platform-btn secondary">
             <i class="fa-solid fa-terminal"></i> Abrir en Linux
-          </a>
-        </div>
-
-        <!-- 6. Web Universal -->
-        <div class="platform-card">
-          <div class="platform-header">
-            <div class="platform-icon icon-web">
-              <i class="fa-solid fa-globe"></i>
-            </div>
-            <div>
-              <h3 class="platform-title">Web en Cualquier Navegador</h3>
-              <small style="color: var(--text-muted);">Sin descargas ni instalaciones</small>
-            </div>
-          </div>
-          <p class="platform-desc">
-            Accede al rezo en vivo directamente desde cualquier navegador web en cualquier parte del mundo.
-          </p>
-          <div class="platform-steps">
-            <strong>Acceso directo:</strong>
-            <ol>
-              <li>Toca "Rezar Ahora en Línea".</li>
-              <li>Carga en segundos con toda la funcionalidad completa.</li>
-            </ol>
-          </div>
-          <a href="app/" target="_blank" class="platform-btn primary">
-            <i class="fa-solid fa-arrow-up-right-from-square"></i> Rezar Ahora en Línea
           </a>
         </div>
 
@@ -1302,18 +1527,18 @@
               <i class="fa-solid fa-qrcode"></i>
             </div>
             <div>
-              <h3 class="donation-card-title">En Bolivia (QR Pago Simple)</h3>
+              <h3 class="donation-card-title">En Bolivia (QR Pago Simple BNB)</h3>
               <p class="donation-card-subtitle">Transferencia desde cualquier banco boliviano</p>
             </div>
           </div>
 
-          <!-- Cuadro de QR para Bolivia (Listo para reemplazar con la imagen definitiva) -->
-          <div class="qr-placeholder-box">
-            <i class="fa-solid fa-money-bill-transfer"></i>
-            <div class="qr-placeholder-text">
-              <strong>QR Pago Simple Bolivia</strong><br>
-              Escanea desde la app de tu banco (BNB, BCP, Banco Unión, Mercantil Santa Cruz, Bisa, Fassil, Fie, etc.)
-            </div>
+          <!-- Cuadro de QR para Bolivia BNB Oficial -->
+          <div style="background: white; border: 1.5px solid var(--border); border-radius: 14px; padding: 14px; text-align: center; margin-bottom: 18px; box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
+            <img src="qr_bnb_bolivia.png" alt="QR Pago Simple BNB - Donación Santo Rosario" 
+                 style="max-width: 230px; width: 100%; height: auto; border-radius: 10px; display: block; margin: 0 auto;">
+            <span style="display: block; margin-top: 8px; font-size: 0.78rem; font-weight: 700; color: #16A34A; text-transform: uppercase;">
+              <i class="fa-solid fa-circle-check"></i> QR Oficial BNB • Válido hasta 2028
+            </span>
           </div>
 
           <div class="donation-details-list">
@@ -1322,17 +1547,21 @@
               <span class="donation-detail-val">Paulo Cesar Loayza Carrasco</span>
             </div>
             <div class="donation-detail-row">
-              <span class="donation-detail-label">País:</span>
-              <span class="donation-detail-val">Bolivia 🇧🇴</span>
+              <span class="donation-detail-label">Banco:</span>
+              <span class="donation-detail-val">BNB (Banco Nacional de Bolivia)</span>
             </div>
             <div class="donation-detail-row">
-              <span class="donation-detail-label">Destino:</span>
-              <span class="donation-detail-val">Mantenimiento y Difusión</span>
+              <span class="donation-detail-label">Monto:</span>
+              <span class="donation-detail-val">Voluntario / Libre</span>
+            </div>
+            <div class="donation-detail-row">
+              <span class="donation-detail-label">Concepto:</span>
+              <span class="donation-detail-val">Donación Santo Rosario Universal</span>
             </div>
           </div>
 
           <p style="font-size: 0.82rem; color: var(--text-muted); text-align: center; margin-top: auto;">
-            <i class="fa-solid fa-shield-heart" style="color: #1565C0;"></i> Transferencia interbancaria instantánea sin comisiones bancarias.
+            <i class="fa-solid fa-shield-heart" style="color: #1565C0;"></i> Válido desde cualquier banco del sistema financiero nacional sin costo de comisión.
           </p>
         </div>
 
@@ -1344,14 +1573,17 @@
             </div>
             <div>
               <h3 class="donation-card-title">Internacional (PayPal)</h3>
-              <p class="donation-card-subtitle">Desde cualquier país con tarjeta o saldo PayPal</p>
+              <p class="donation-card-subtitle">Tarjeta de débito/crédito o cuenta PayPal</p>
             </div>
           </div>
 
-          <div style="margin-bottom: 20px; font-size: 0.92rem; color: var(--text-muted); line-height: 1.6;">
-            <p>
-              Puedes realizar tu aporte de manera segura y confidencial utilizando tu cuenta de <strong>PayPal</strong> o cualquier tarjeta de crédito/débito internacional (Visa, Mastercard, American Express).
-            </p>
+          <!-- Cuadro de QR de Donación PayPal -->
+          <div style="background: white; border: 1.5px solid var(--border); border-radius: 14px; padding: 14px; text-align: center; margin-bottom: 18px; box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
+            <img src="qr_paypal.png" alt="QR Donación PayPal - Santo Rosario Universal" 
+                 style="max-width: 170px; width: 100%; height: auto; border-radius: 8px; display: block; margin: 0 auto;">
+            <span style="display: block; margin-top: 8px; font-size: 0.78rem; font-weight: 700; color: #0284C7; text-transform: uppercase;">
+              <i class="fa-solid fa-qrcode"></i> Escanea con tu móvil para donar
+            </span>
           </div>
 
           <div class="donation-details-list">
@@ -1360,20 +1592,75 @@
               <span class="donation-detail-val">PayPal Oficial 🌎</span>
             </div>
             <div class="donation-detail-row">
-              <span class="donation-detail-label">Moneda:</span>
-              <span class="donation-detail-val">USD / EUR / Moneda local</span>
+              <span class="donation-detail-label">PayPal.me:</span>
+              <span class="donation-detail-val">paypal.me/PauloLoayza</span>
             </div>
             <div class="donation-detail-row">
-              <span class="donation-detail-label">Seguridad:</span>
-              <span class="donation-detail-val">Protección al donante</span>
+              <span class="donation-detail-label">Moneda:</span>
+              <span class="donation-detail-val">USD / Todas las divisas</span>
             </div>
           </div>
 
-          <a href="https://www.paypal.com/donate/?hosted_button_id=TU_ID_AQUI" target="_blank" class="btn-paypal">
-            <i class="fa-brands fa-paypal"></i> Donar con PayPal
-          </a>
+          <div style="display: flex; flex-direction: column; gap: 10px; margin-top: auto;">
+            <a href="https://www.paypal.com/donate/?business=CBMHVV29QJW92&no_recurring=0&item_name=Ay%C3%BAdanos+a+mantener+y+mejorar+la+APP+del+Santo+Rosario+Universal+y+lleva+fe+a+miles+de+personas.+%C2%A1Que+Dios++te+bendigan%21&currency_code=USD" 
+               target="_blank" class="btn-paypal">
+              <i class="fa-solid fa-heart"></i> Donar con Tarjeta o PayPal
+            </a>
+            <a href="https://paypal.me/PauloLoayza?locale.x=en_US&country.x=US" 
+               target="_blank" class="platform-btn secondary" style="padding: 10px; font-size: 0.88rem;">
+              <i class="fa-brands fa-paypal"></i> Abrir PayPal.Me/PauloLoayza
+            </a>
+          </div>
         </div>
 
+      </div>
+    </section>
+
+    <!-- Sección de Comentarios y Testimonios de la Comunidad -->
+    <section id="comentarios" class="comments-section">
+      <div class="comments-header">
+        <div>
+          <h2><i class="fa-solid fa-comments" style="color: var(--primary);"></i> Testimonios y Comentarios</h2>
+          <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 4px;">
+            Comparte tu experiencia de oración, intenciones o agradecimientos con la comunidad del Santo Rosario.
+          </p>
+        </div>
+        <div>
+          <button id="btn-admin-toggle" class="btn-admin-mode" onclick="openAdminModal()">
+            <i class="fa-solid fa-shield-halved"></i> <span id="admin-btn-text">Modo Administrador</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Formulario para publicar comentario -->
+      <div class="comment-form-card">
+        <h4 style="margin-bottom: 14px; font-size: 1.05rem; color: #0F172A; display: flex; align-items: center; gap: 8px;">
+          <i class="fa-solid fa-pen-nib" style="color: var(--accent);"></i> Deja tu testimonio o petición
+        </h4>
+        <form id="comment-form" onsubmit="handleCommentSubmit(event)">
+          <div class="comment-form-row">
+            <div class="form-group">
+              <label for="comment-author">Tu Nombre o Familia *</label>
+              <input type="text" id="comment-author" class="form-control" placeholder="Ej: Familia Morales / María Elena" required maxlength="50">
+            </div>
+            <div class="form-group">
+              <label for="comment-location">Ciudad o País</label>
+              <input type="text" id="comment-location" class="form-control" placeholder="Ej: Santa Cruz, Bolivia / Madrid, España" maxlength="50">
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label for="comment-text">Mensaje o Testimonio *</label>
+            <textarea id="comment-text" class="form-control" placeholder="Escribe aquí tu testimonio, bendición o cómo te ayuda la aplicación en tu vida de oración..." required maxlength="600"></textarea>
+          </div>
+          <button type="submit" class="btn-submit-comment">
+            <i class="fa-solid fa-paper-plane"></i> Publicar Comentario
+          </button>
+        </form>
+      </div>
+
+      <!-- Lista de comentarios -->
+      <div id="comments-container" class="comments-list">
+        <!-- Renderizado dinámicamente con JS -->
       </div>
     </section>
 
@@ -1399,6 +1686,22 @@
       <p style="margin-top: 6px; font-size: 0.8rem; opacity: 0.75;">Santa Cruz de la Sierra, Bolivia • 2026</p>
     </div>
   </footer>
+
+  <!-- Modal de Autenticación de Administrador -->
+  <div id="admin-modal" class="admin-modal-backdrop" onclick="closeAdminModal(event)">
+    <div class="admin-modal-card" onclick="event.stopPropagation()">
+      <div style="width: 50px; height: 50px; border-radius: 50%; background: #EFF6FF; color: #2563EB; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; font-size: 1.4rem;">
+        <i class="fa-solid fa-key"></i>
+      </div>
+      <h3>Panel de Moderación</h3>
+      <p>Ingresa tu clave de administrador para moderar y eliminar comentarios indeseados.</p>
+      <input type="password" id="admin-pass-input" class="form-control" placeholder="Clave de acceso" style="text-align: center; font-size: 1.1rem; letter-spacing: 2px;">
+      <div class="admin-modal-actions">
+        <button onclick="closeAdminModal()" class="platform-btn secondary" style="flex: 1; padding: 10px;">Cancelar</button>
+        <button onclick="verifyAdminPass()" class="platform-btn primary" style="flex: 1; padding: 10px;">Acceder</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Mensaje flotante de confirmación -->
   <div id="toast" class="toast">
@@ -1471,6 +1774,217 @@
         toast.style.display = "none";
       }, 3000);
     }
+
+    // ==========================================
+    // SISTEMA DE COMENTARIOS Y MODERACIÓN ADMIN
+    // ==========================================
+    const DEFAULT_COMMENTS = [
+      {
+        id: "c_1",
+        author: "Familia Loayza Carrasco",
+        location: "Santa Cruz, Bolivia",
+        date: "08/10/2026",
+        text: "¡Una bendición inmensa para rezar en familia! La disposición del rosario por cuentas y las lecturas bíblicas ayudan a meditar profundamente cada misterio."
+      },
+      {
+        id: "c_2",
+        author: "María Elena Rivas",
+        location: "Cochabamba, Bolivia",
+        date: "07/10/2026",
+        text: "Hermosa aplicación. Siempre me costaba seguir el orden de las letanías y aquí está todo completo y guiado. Dios bendiga esta iniciativa."
+      },
+      {
+        id: "c_3",
+        author: "Juan Pablo Duarte",
+        location: "Buenos Aires, Argentina",
+        date: "06/10/2026",
+        text: "Excelente diseño para celular y computadora. El modo Guía y Asamblea lo estamos usando en nuestro grupo parroquial de oración."
+      }
+    ];
+
+    const COMMENTS_STORAGE_KEY = "santo_rosario_comments_v1";
+    let isAdmin = false;
+
+    // Obtener comentarios almacenados
+    function getStoredComments() {
+      try {
+        const stored = localStorage.getItem(COMMENTS_STORAGE_KEY);
+        if (stored) {
+          return JSON.parse(stored);
+        }
+      } catch (e) {
+        console.error("Error reading localStorage", e);
+      }
+      return [...DEFAULT_COMMENTS];
+    }
+
+    // Guardar comentarios
+    function saveComments(comments) {
+      try {
+        localStorage.setItem(COMMENTS_STORAGE_KEY, JSON.stringify(comments));
+      } catch (e) {
+        console.error("Error saving localStorage", e);
+      }
+    }
+
+    // Renderizar comentarios
+    function renderComments() {
+      const container = document.getElementById("comments-container");
+      const comments = getStoredComments();
+      container.innerHTML = "";
+
+      if (comments.length === 0) {
+        container.innerHTML = `
+          <div style="text-align: center; padding: 30px; color: var(--text-muted); font-size: 0.95rem;">
+            <i class="fa-regular fa-comment-dots" style="font-size: 2rem; margin-bottom: 8px; color: #CBD5E1;"></i>
+            <p>Sé el primero en compartir un testimonio o petición de oración.</p>
+          </div>
+        `;
+        return;
+      }
+
+      comments.forEach(comment => {
+        const initial = comment.author ? comment.author.charAt(0).toUpperCase() : "O";
+        const card = document.createElement("div");
+        card.className = "comment-card";
+        card.id = `comment-${comment.id}`;
+        card.innerHTML = `
+          <div class="comment-meta">
+            <div class="comment-author-wrap">
+              <div class="comment-avatar">${initial}</div>
+              <div>
+                <div class="comment-name">${escapeHtml(comment.author)}</div>
+                ${comment.location ? `<div class="comment-country"><i class="fa-solid fa-location-dot"></i> ${escapeHtml(comment.location)}</div>` : ''}
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span class="comment-date">${comment.date}</span>
+              <button class="btn-delete-comment" onclick="deleteComment('${comment.id}')" title="Eliminar comentario">
+                <i class="fa-solid fa-trash-can"></i> Eliminar
+              </button>
+            </div>
+          </div>
+          <div class="comment-body">${escapeHtml(comment.text)}</div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // Publicar nuevo comentario
+    function handleCommentSubmit(event) {
+      event.preventDefault();
+      const authorInput = document.getElementById("comment-author");
+      const locationInput = document.getElementById("comment-location");
+      const textInput = document.getElementById("comment-text");
+
+      const author = authorInput.value.trim();
+      const location = locationInput.value.trim();
+      const text = textInput.value.trim();
+
+      if (!author || !text) {
+        showToast("Por favor ingresa tu nombre y mensaje.");
+        return;
+      }
+
+      const today = new Date();
+      const dateStr = today.toLocaleDateString("es-ES", { day: '2-digit', month: '2-digit', year: 'numeric' });
+
+      const newComment = {
+        id: "c_" + Date.now(),
+        author: author,
+        location: location,
+        date: dateStr,
+        text: text
+      };
+
+      const comments = getStoredComments();
+      comments.unshift(newComment);
+      saveComments(comments);
+
+      authorInput.value = "";
+      locationInput.value = "";
+      textInput.value = "";
+
+      renderComments();
+      showToast("¡Comentario publicado con éxito!");
+    }
+
+    // Modal de Administrador
+    function openAdminModal() {
+      if (isAdmin) {
+        // Si ya está activo, salir del modo admin
+        isAdmin = false;
+        document.body.classList.remove("admin-active");
+        document.getElementById("btn-admin-toggle").classList.remove("active");
+        document.getElementById("admin-btn-text").textContent = "Modo Administrador";
+        showToast("Modo Administrador desactivado");
+        return;
+      }
+      const modal = document.getElementById("admin-modal");
+      const input = document.getElementById("admin-pass-input");
+      input.value = "";
+      modal.style.display = "flex";
+      setTimeout(() => input.focus(), 100);
+    }
+
+    function closeAdminModal(e) {
+      if (!e || e.target.id === "admin-modal" || !e.target) {
+        document.getElementById("admin-modal").style.display = "none";
+      }
+    }
+
+    function verifyAdminPass() {
+      const input = document.getElementById("admin-pass-input");
+      const pass = input.value.trim();
+      
+      // Clave maestra de administrador
+      if (pass === "rosario2026" || pass === "pcloayza") {
+        isAdmin = true;
+        document.body.classList.add("admin-active");
+        document.getElementById("btn-admin-toggle").classList.add("active");
+        document.getElementById("admin-btn-text").textContent = "Cerrar Modo Admin";
+        document.getElementById("admin-modal").style.display = "none";
+        showToast("¡Modo Administrador activado!");
+      } else {
+        showToast("Clave incorrecta. Acceso denegado.");
+        input.value = "";
+        input.focus();
+      }
+    }
+
+    // Eliminar comentario (solo admin)
+    function deleteComment(commentId) {
+      if (!isAdmin) {
+        showToast("Debes identificarte como administrador para eliminar.");
+        return;
+      }
+      if (confirm("¿Estás seguro de que deseas eliminar este comentario?")) {
+        let comments = getStoredComments();
+        comments = comments.filter(c => c.id !== commentId);
+        saveComments(comments);
+        renderComments();
+        showToast("Comentario eliminado correctamente.");
+      }
+    }
+
+    // Sanitización HTML
+    function escapeHtml(string) {
+      const div = document.createElement("div");
+      div.innerText = string;
+      return div.innerHTML;
+    }
+
+    // Escuchar tecla Enter en input de clave
+    document.getElementById("admin-pass-input")?.addEventListener("keydown", function(e) {
+      if (e.key === "Enter") {
+        verifyAdminPass();
+      }
+    });
+
+    // Iniciar renderizado al cargar
+    document.addEventListener("DOMContentLoaded", () => {
+      renderComments();
+    });
   </script>
 </body>
 </html>
