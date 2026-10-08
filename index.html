@@ -194,6 +194,8 @@
       align-items: center;
       position: relative;
       overflow: hidden;
+      box-sizing: border-box;
+      max-width: 100%;
     }
     .qr-banner-card::before {
       content: '';
@@ -216,21 +218,24 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      width: fit-content;
       margin: 0 auto;
+      box-sizing: border-box;
+      max-width: 210px;
+      width: 100%;
     }
     #qrcode {
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 8px;
-      width: 170px;
-      height: 170px;
+      padding: 4px;
+      width: 160px;
+      height: 160px;
       margin: 0 auto;
+      box-sizing: border-box;
     }
     #qrcode canvas, #qrcode img {
       width: 100% !important;
-      max-width: 170px !important;
+      max-width: 160px !important;
       height: auto !important;
       aspect-ratio: 1 / 1;
       border-radius: 8px;
@@ -1039,38 +1044,72 @@
 
     @media (max-width: 768px) {
       .qr-banner-card {
-        grid-template-columns: 1fr;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
         text-align: center;
-        padding: 20px 16px;
-        gap: 20px;
-        margin-left: auto;
-        margin-right: auto;
-        max-width: 100%;
+        padding: 24px 16px !important;
+        gap: 20px !important;
+        margin: 0 auto 36px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
       }
       .qr-box-wrapper {
         margin: 0 auto !important;
-        max-width: 220px;
-        width: 100%;
-        padding: 14px;
-        box-sizing: border-box;
+        max-width: 190px !important;
+        width: 100% !important;
+        padding: 12px !important;
+        box-sizing: border-box !important;
+        flex-shrink: 0;
       }
       #qrcode {
-        width: 160px;
-        height: 160px;
-        margin: 0 auto;
-        padding: 0;
+        width: 150px !important;
+        height: 150px !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
       }
       #qrcode canvas, #qrcode img {
-        max-width: 160px !important;
-        margin: 0 auto;
+        width: 100% !important;
+        max-width: 150px !important;
+        height: auto !important;
+        margin: 0 auto !important;
+        display: block !important;
+      }
+      .qr-info-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .qr-info-content h3 {
+        justify-content: center !important;
+        font-size: 1.35rem !important;
+        word-break: break-word;
       }
       .qr-link-box {
-        margin: 0 auto 16px;
-        width: 100%;
-        box-sizing: border-box;
+        margin: 0 auto 16px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        gap: 8px !important;
+      }
+      .qr-link-url {
+        font-size: 0.8rem !important;
       }
       .qr-actions {
-        justify-content: center;
+        justify-content: center !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 10px !important;
+      }
+      .qr-actions .btn-share {
+        width: 100% !important;
+        justify-content: center !important;
+        box-sizing: border-box !important;
       }
       .hero-title {
         font-size: 2.1rem;
@@ -1088,6 +1127,9 @@
       }
       .donation-section {
         padding: 26px 18px;
+      }
+      .comment-form-row {
+        grid-template-columns: 1fr !important;
       }
     }
   </style>
@@ -1535,7 +1577,7 @@
           <!-- Cuadro de QR para Bolivia BNB Oficial -->
           <div style="background: white; border: 1.5px solid var(--border); border-radius: 14px; padding: 14px; text-align: center; margin-bottom: 18px; box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
             <img src="qr_bnb_bolivia.png" alt="QR Pago Simple BNB - Donación Santo Rosario" 
-                 style="max-width: 230px; width: 100%; height: auto; border-radius: 10px; display: block; margin: 0 auto;">
+                 style="max-width: 200px; width: 100%; height: auto; border-radius: 10px; display: block; margin: 0 auto; aspect-ratio: 1 / 1; object-fit: contain;">
             <span style="display: block; margin-top: 8px; font-size: 0.78rem; font-weight: 700; color: #16A34A; text-transform: uppercase;">
               <i class="fa-solid fa-circle-check"></i> QR Oficial BNB • Válido hasta 2028
             </span>
@@ -1638,21 +1680,19 @@
           <i class="fa-solid fa-pen-nib" style="color: var(--accent);"></i> Deja tu testimonio o petición
         </h4>
         <form id="comment-form" onsubmit="handleCommentSubmit(event)">
-          <div class="comment-form-row">
-            <div class="form-group">
-              <label for="comment-author">Tu Nombre o Familia *</label>
-              <input type="text" id="comment-author" class="form-control" placeholder="Ej: Familia Morales / María Elena" required maxlength="50">
-            </div>
-            <div class="form-group">
-              <label for="comment-location">Ciudad o País</label>
-              <input type="text" id="comment-location" class="form-control" placeholder="Ej: Santa Cruz, Bolivia / Madrid, España" maxlength="50">
-            </div>
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label for="comment-author">Tu Nombre o Familia *</label>
+            <input type="text" id="comment-author" class="form-control" placeholder="Ej: Maria Elena / Familia Morales" required maxlength="50">
           </div>
           <div class="form-group" style="margin-bottom: 16px;">
-            <label for="comment-text">Mensaje o Testimonio *</label>
-            <textarea id="comment-text" class="form-control" placeholder="Escribe aquí tu testimonio, bendición o cómo te ayuda la aplicación en tu vida de oración..." required maxlength="600"></textarea>
+            <label for="comment-location">Ciudad o País (Opcional)</label>
+            <input type="text" id="comment-location" class="form-control" placeholder="Ej: Santa Cruz, Bolivia / Cochabamba / Madrid" maxlength="50">
           </div>
-          <button type="submit" class="btn-submit-comment">
+          <div class="form-group" style="margin-bottom: 20px;">
+            <label for="comment-text">Mensaje o Testimonio *</label>
+            <textarea id="comment-text" class="form-control" placeholder="Escribe aquí tu testimonio, bendición o cómo te ayuda la aplicación en tu vida de oración..." required maxlength="600" rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn-submit-comment" style="width: 100%; justify-content: center; padding: 13px;">
             <i class="fa-solid fa-paper-plane"></i> Publicar Comentario
           </button>
         </form>
@@ -1781,7 +1821,7 @@
     const DEFAULT_COMMENTS = [
       {
         id: "c_1",
-        author: "Familia Loayza Carrasco",
+        author: "Jose Suarez",
         location: "Santa Cruz, Bolivia",
         date: "08/10/2026",
         text: "¡Una bendición inmensa para rezar en familia! La disposición del rosario por cuentas y las lecturas bíblicas ayudan a meditar profundamente cada misterio."
@@ -1802,7 +1842,7 @@
       }
     ];
 
-    const COMMENTS_STORAGE_KEY = "santo_rosario_comments_v1";
+    const COMMENTS_STORAGE_KEY = "santo_rosario_comments_v2";
     let isAdmin = false;
 
     // Obtener comentarios almacenados
@@ -1810,7 +1850,13 @@
       try {
         const stored = localStorage.getItem(COMMENTS_STORAGE_KEY);
         if (stored) {
-          return JSON.parse(stored);
+          const list = JSON.parse(stored);
+          return list.map(c => {
+            if (c.author === "Familia Loayza Carrasco") {
+              c.author = "Jose Suarez";
+            }
+            return c;
+          });
         }
       } catch (e) {
         console.error("Error reading localStorage", e);
