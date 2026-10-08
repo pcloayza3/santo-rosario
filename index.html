@@ -1731,14 +1731,23 @@
   <div id="admin-modal" class="admin-modal-backdrop" onclick="closeAdminModal(event)">
     <div class="admin-modal-card" onclick="event.stopPropagation()">
       <div style="width: 50px; height: 50px; border-radius: 50%; background: #EFF6FF; color: #2563EB; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; font-size: 1.4rem;">
-        <i class="fa-solid fa-key"></i>
+        <i class="fa-brands fa-github"></i>
       </div>
-      <h3>Panel de Moderación</h3>
-      <p>Ingresa tu clave de administrador para moderar y eliminar comentarios indeseados.</p>
-      <input type="password" id="admin-pass-input" class="form-control" placeholder="Clave de acceso" style="text-align: center; font-size: 1.1rem; letter-spacing: 2px;">
+      <h3 style="margin-bottom: 6px;">Moderación de Comentarios</h3>
+      <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 16px;">
+        Acceso reservado exclusivamente para el dueño del repositorio: <br><strong style="color: var(--primary);">@pcloayza3</strong>
+      </p>
+      <div style="text-align: left; margin-bottom: 10px;">
+        <label style="font-size: 0.78rem; font-weight: 700; color: #475569; display: block; margin-bottom: 4px;">USUARIO GITHUB:</label>
+        <input type="text" id="admin-user-input" class="form-control" value="pcloayza3" placeholder="Usuario GitHub" style="text-align: center; font-weight: 700; font-size: 0.95rem;">
+      </div>
+      <div style="text-align: left; margin-bottom: 16px;">
+        <label style="font-size: 0.78rem; font-weight: 700; color: #475569; display: block; margin-bottom: 4px;">CLAVE DE ACCESO O TOKEN:</label>
+        <input type="password" id="admin-pass-input" class="form-control" placeholder="Clave o Token" style="text-align: center; font-size: 1.05rem; letter-spacing: 2px;">
+      </div>
       <div class="admin-modal-actions">
         <button onclick="closeAdminModal()" class="platform-btn secondary" style="flex: 1; padding: 10px;">Cancelar</button>
-        <button onclick="verifyAdminPass()" class="platform-btn primary" style="flex: 1; padding: 10px;">Acceder</button>
+        <button onclick="verifyAdminPass()" class="platform-btn primary" style="flex: 1; padding: 10px;" id="admin-submit-btn">Acceder</button>
       </div>
     </div>
   </div>
@@ -1979,23 +1988,64 @@
       }
     }
 
-    function verifyAdminPass() {
-      const input = document.getElementById("admin-pass-input");
-      const pass = input.value.trim();
-      
-      // Clave maestra de administrador
-      if (pass === "rosario2026" || pass === "pcloayza") {
-        isAdmin = true;
-        document.body.classList.add("admin-active");
-        document.getElementById("btn-admin-toggle").classList.add("active");
-        document.getElementById("admin-btn-text").textContent = "Cerrar Modo Admin";
-        document.getElementById("admin-modal").style.display = "none";
-        showToast("¡Modo Administrador activado!");
-      } else {
-        showToast("Clave incorrecta. Acceso denegado.");
-        input.value = "";
-        input.focus();
+    async function verifyAdminPass() {
+      const userInput = document.getElementById("admin-user-input");
+      const passInput = document.getElementById("admin-pass-input");
+      const submitBtn = document.getElementById("admin-submit-btn");
+
+      const user = (userInput?.value || "").trim().toLowerCase();
+      const pass = (passInput?.value || "").trim();
+
+      // Validación estricta del usuario dueño del repositorio GitHub
+      if (user !== "pcloayza3" && user !== "pcloayza3@gmail.com") {
+        showToast("Acceso denegado: Solo el dueño (@pcloayza3) puede administrar.");
+        userInput?.focus();
+        return;
       }
+
+      // Si ingresa un token de GitHub (personal access token)
+      if (pass.startsWith("ghp_") || pass.startsWith("github_pat_")) {
+        if (submitBtn) submitBtn.textContent = "Verificando...";
+        try {
+          const res = await fetch("https://api.github.com/user", {
+            headers: {
+              "Authorization": `Bearer ${pass}`,
+              "Accept": "application/vnd.github.v3+json"
+            }
+          });
+          if (res.ok) {
+            const data = await res.json();
+            if (data.login && data.login.toLowerCase() === "pcloayza3") {
+              activateAdminSuccess();
+              return;
+            }
+          }
+        } catch (e) {
+          console.warn("GitHub API check error:", e);
+        } finally {
+          if (submitBtn) submitBtn.textContent = "Acceder";
+        }
+      }
+
+      // Validación con claves maestras autorizadas para @pcloayza3
+      if (pass === "rosario2026" || pass === "pcloayza" || pass === "pcloayza3" || pass === "santo2026") {
+        activateAdminSuccess();
+      } else {
+        showToast("Clave incorrecta para @pcloayza3. Acceso denegado.");
+        if (passInput) {
+          passInput.value = "";
+          passInput.focus();
+        }
+      }
+    }
+
+    function activateAdminSuccess() {
+      isAdmin = true;
+      document.body.classList.add("admin-active");
+      document.getElementById("btn-admin-toggle").classList.add("active");
+      document.getElementById("admin-btn-text").textContent = "Cerrar Modo Admin";
+      document.getElementById("admin-modal").style.display = "none";
+      showToast("¡Bienvenido @pcloayza3! Modo Administrador activado.");
     }
 
     // Eliminar comentario (solo admin)
@@ -2020,7 +2070,12 @@
       return div.innerHTML;
     }
 
-    // Escuchar tecla Enter en input de clave
+    // Escuchar tecla Enter en inputs de admin
+    document.getElementById("admin-user-input")?.addEventListener("keydown", function(e) {
+      if (e.key === "Enter") {
+        document.getElementById("admin-pass-input")?.focus();
+      }
+    });
     document.getElementById("admin-pass-input")?.addEventListener("keydown", function(e) {
       if (e.key === "Enter") {
         verifyAdminPass();
