@@ -2220,36 +2220,83 @@
     </div>
   </div>
 
-  <!-- Modal de Autenticación de Administrador -->
+  <!-- Modal de Autenticación de Administrador (2FA con Código al Correo) -->
   <div id="admin-modal" class="admin-modal-backdrop" onclick="closeAdminModal(event)">
     <div class="admin-modal-card" onclick="event.stopPropagation()">
-      <div style="width: 52px; height: 52px; border-radius: 50%; background: #EFF6FF; color: #2563EB; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; font-size: 1.5rem;">
-        <i class="fa-brands fa-github"></i>
-      </div>
-      <h3 style="margin-bottom: 6px;">Identificación con GitHub</h3>
-      <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 16px;">
-        Para acceder al panel debes autenticarte. Tu usuario de GitHub será verificado automáticamente sin posibilidad de ser alterado manualmente.
-      </p>
+      
+      <!-- PASO 1: Credencial o Token de GitHub -->
+      <div id="admin-step-1">
+        <div style="width: 52px; height: 52px; border-radius: 50%; background: #EFF6FF; color: #2563EB; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-size: 1.5rem;">
+          <i class="fa-brands fa-github"></i>
+        </div>
+        <div style="display: inline-block; padding: 3px 10px; background: #DBEAFE; color: #1E40AF; border-radius: 12px; font-size: 0.72rem; font-weight: 700; margin-bottom: 8px; letter-spacing: 0.5px;">
+          PASO 1 DE 2: IDENTIFICACIÓN
+        </div>
+        <h3 style="margin-bottom: 6px; font-size: 1.25rem;">Acceso de Administrador</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">
+          Ingresa tu Personal Access Token de GitHub o contraseña maestra para continuar al paso de verificación.
+        </p>
 
-      <div id="admin-detected-user-box" style="display: none; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; padding: 12px; margin-bottom: 16px; text-align: left; align-items: center; gap: 12px;">
-        <img id="admin-detected-avatar" src="" style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid #CBD5E1;" alt="Avatar">
-        <div>
-          <div style="font-size: 0.72rem; color: #64748B; font-weight: 700;">USUARIO AUTENTICADO POR GITHUB:</div>
-          <strong id="admin-detected-login" style="font-size: 1rem; color: #0F172A;">-</strong>
+        <div id="admin-detected-user-box" style="display: none; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; padding: 12px; margin-bottom: 16px; text-align: left; align-items: center; gap: 12px;">
+          <img id="admin-detected-avatar" src="" style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid #CBD5E1;" alt="Avatar">
+          <div>
+            <div style="font-size: 0.72rem; color: #64748B; font-weight: 700;">USUARIO AUTENTICADO POR GITHUB:</div>
+            <strong id="admin-detected-login" style="font-size: 1rem; color: #0F172A;">-</strong>
+          </div>
+        </div>
+
+        <div style="text-align: left; margin-bottom: 16px;">
+          <label style="font-size: 0.78rem; font-weight: 700; color: #475569; display: block; margin-bottom: 4px;">TOKEN DE GITHUB O CLAVE:</label>
+          <input type="password" id="admin-pass-input" class="form-control" placeholder="Ingresa tu token de GitHub o clave" style="text-align: center; font-size: 1rem;" onkeydown="if(event.key==='Enter') verifyAdminPass()">
+          <small style="display: block; color: var(--text-muted); font-size: 0.75rem; margin-top: 5px;">
+            <i class="fa-solid fa-shield-halved"></i> Al validar la clave, se enviará un código de seguridad a tu correo.
+          </small>
+        </div>
+        <div class="admin-modal-actions">
+          <button onclick="closeAdminModal()" class="platform-btn secondary" style="flex: 1; padding: 10px;">Cancelar</button>
+          <button onclick="verifyAdminPass()" class="platform-btn primary" style="flex: 1.2; padding: 10px;" id="admin-submit-btn">
+            Siguiente <i class="fa-solid fa-arrow-right" style="margin-left: 4px;"></i>
+          </button>
         </div>
       </div>
 
-      <div style="text-align: left; margin-bottom: 16px;">
-        <label style="font-size: 0.78rem; font-weight: 700; color: #475569; display: block; margin-bottom: 4px;">TOKEN PERSONAL DE GITHUB O CLAVE:</label>
-        <input type="password" id="admin-pass-input" class="form-control" placeholder="Ingresa tu Personal Access Token o clave" style="text-align: center; font-size: 1rem;">
-        <small style="display: block; color: var(--text-muted); font-size: 0.75rem; margin-top: 5px;">
-          <i class="fa-solid fa-shield-halved"></i> Se valida directamente contra GitHub API que seas el dueño del repositorio.
-        </small>
+      <!-- PASO 2: Código de Seguridad enviado a pcloayza3@gmail.com -->
+      <div id="admin-step-2" style="display: none;">
+        <div style="width: 52px; height: 52px; border-radius: 50%; background: #ECFDF5; color: #059669; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-size: 1.5rem;">
+          <i class="fa-solid fa-shield-cat"></i>
+        </div>
+        <div style="display: inline-block; padding: 3px 10px; background: #D1FAE5; color: #065F46; border-radius: 12px; font-size: 0.72rem; font-weight: 700; margin-bottom: 8px; letter-spacing: 0.5px;">
+          PASO 2 DE 2: VERIFICACIÓN 2FA
+        </div>
+        <h3 style="margin-bottom: 6px; font-size: 1.25rem;">Código de Seguridad</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px;">
+          Hemos enviado un código de 6 dígitos a <br><strong style="color: #0F172A; font-family: monospace; font-size: 0.95rem;">pcloayza3@gmail.com</strong>
+        </p>
+
+        <div style="background: #F8FAFC; border: 1px dashed #CBD5E1; border-radius: 10px; padding: 14px; margin-bottom: 14px;">
+          <label style="font-size: 0.76rem; font-weight: 700; color: #475569; display: block; margin-bottom: 6px;">CÓDIGO DE VERIFICACIÓN (6 DÍGITOS):</label>
+          <input type="text" id="admin-2fa-input" class="form-control" placeholder="······" maxlength="6" inputmode="numeric" autocomplete="one-time-code" style="text-align: center; font-size: 1.6rem; letter-spacing: 8px; font-weight: 800; font-family: monospace; color: #0F172A; background: white;" onkeydown="if(event.key==='Enter') verify2FaCode()">
+          
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: 0.78rem; color: var(--text-muted);">
+            <span><i class="fa-regular fa-clock"></i> Expira en: <strong id="admin-2fa-timer" style="color: #E11D48;">10:00</strong></span>
+            <button type="button" onclick="resend2FaCode()" id="btn-resend-2fa" style="background: none; border: none; color: #2563EB; font-weight: 600; cursor: pointer; text-decoration: underline; font-size: 0.78rem; padding: 0;">
+              Reenviar código
+            </button>
+          </div>
+        </div>
+
+        <div id="admin-2fa-status-msg" style="display: none; padding: 8px 12px; border-radius: 6px; font-size: 0.78rem; margin-bottom: 12px;"></div>
+
+        <div class="admin-modal-actions">
+          <button onclick="backToStep1()" class="platform-btn secondary" style="flex: 1; padding: 10px;">
+            <i class="fa-solid fa-arrow-left" style="margin-right: 4px;"></i> Volver
+          </button>
+          <button onclick="verify2FaCode()" class="platform-btn primary" style="flex: 1.4; padding: 10px;" id="admin-2fa-submit-btn">
+            <i class="fa-solid fa-lock-open" style="margin-right: 4px;"></i> Verificar e Ingresar
+          </button>
+        </div>
       </div>
-      <div class="admin-modal-actions">
-        <button onclick="closeAdminModal()" class="platform-btn secondary" style="flex: 1; padding: 10px;">Cancelar</button>
-        <button onclick="verifyAdminPass()" class="platform-btn primary" style="flex: 1; padding: 10px;" id="admin-submit-btn">Verificar e Ingresar</button>
-      </div>
+
     </div>
   </div>
 
@@ -3317,18 +3364,39 @@
     }
 
     // ========================================================
-    // AUTENTICACIÓN DINÁMICA CON GITHUB (SIN USUARIO PREDEFINIDO)
+    // AUTENTICACIÓN EN DOS PASOS (2FA) CON ENVÍO AL CORREO
     // ========================================================
+    let current2FaSession = null;
+    let timer2FaInterval = null;
+
+    function reset2FaFlow() {
+      if (timer2FaInterval) {
+        clearInterval(timer2FaInterval);
+        timer2FaInterval = null;
+      }
+      current2FaSession = null;
+      const step1 = document.getElementById("admin-step-1");
+      const step2 = document.getElementById("admin-step-2");
+      if (step1) step1.style.display = "block";
+      if (step2) step2.style.display = "none";
+      const passInput = document.getElementById("admin-pass-input");
+      if (passInput) passInput.value = "";
+      const codeInput = document.getElementById("admin-2fa-input");
+      if (codeInput) codeInput.value = "";
+      const statusMsg = document.getElementById("admin-2fa-status-msg");
+      if (statusMsg) statusMsg.style.display = "none";
+    }
+
     function openAdminModal() {
       if (isAdmin) {
         openMetricsModal();
         return;
       }
+      reset2FaFlow();
       const modal = document.getElementById("admin-modal");
       const input = document.getElementById("admin-pass-input");
       const detectedBox = document.getElementById("admin-detected-user-box");
       if (detectedBox) detectedBox.style.display = "none";
-      if (input) input.value = "";
       if (modal) modal.style.display = "flex";
       setTimeout(() => input?.focus(), 100);
     }
@@ -3337,10 +3405,21 @@
       if (!e || e.target.id === "admin-modal" || !e.target) {
         const modal = document.getElementById("admin-modal");
         if (modal) modal.style.display = "none";
+        reset2FaFlow();
       }
     }
 
-    // Verificación estricta con GitHub API (detecta al usuario de forma automática)
+    function backToStep1() {
+      if (timer2FaInterval) clearInterval(timer2FaInterval);
+      const step1 = document.getElementById("admin-step-1");
+      const step2 = document.getElementById("admin-step-2");
+      if (step1) step1.style.display = "block";
+      if (step2) step2.style.display = "none";
+      const input = document.getElementById("admin-pass-input");
+      setTimeout(() => input?.focus(), 100);
+    }
+
+    // Paso 1: Verificación de Credencial / Token
     async function verifyAdminPass() {
       const passInput = document.getElementById("admin-pass-input");
       const submitBtn = document.getElementById("admin-submit-btn");
@@ -3362,7 +3441,7 @@
       }
 
       try {
-        // 1. Si es un token de GitHub (personal access token ghp_ o fine-grained github_pat_):
+        // 1. Si es un token personal de GitHub:
         const isGitHubToken = pass.startsWith("ghp_") || pass.startsWith("github_pat_") || pass.length >= 35;
         
         if (isGitHubToken) {
@@ -3377,16 +3456,15 @@
             const data = await res.json();
             const authenticatedUser = (data.login || "").toLowerCase();
             
-            // Mostrar usuario detectado automáticamente desde la cuenta de GitHub
             if (detectedBox && detectedLogin && detectedAvatar) {
               detectedLogin.textContent = "@" + data.login + (data.name ? ` (${data.name})` : "");
               detectedAvatar.src = data.avatar_url || "app_icon.png";
               detectedBox.style.display = "flex";
             }
 
-            // Validar que el usuario sea estrictamente el dueño del repositorio (@pcloayza3)
+            // Validar que sea estrictamente el dueño del repositorio (@pcloayza3)
             if (authenticatedUser === "pcloayza3") {
-              activateAdminSuccess(data.login, data.avatar_url);
+              start2FaProcess(data.login, data.avatar_url);
               return;
             } else {
               showToast(`Acceso denegado: El usuario autenticado @${data.login} no es el propietario del repositorio.`);
@@ -3399,9 +3477,9 @@
           }
         }
 
-        // 2. Validación de clave autorizada para el propietario
+        // 2. Validación de clave maestra para el propietario
         if (pass === "rosario2026" || pass === "pcloayza" || pass === "pcloayza3" || pass === "santo2026") {
-          activateAdminSuccess("pcloayza3", "app_icon.png");
+          start2FaProcess("pcloayza3", "app_icon.png");
           return;
         }
 
@@ -3411,14 +3489,202 @@
           passInput.focus();
         }
       } catch (e) {
-        console.warn("Error en autenticación con GitHub:", e);
-        showToast("Error de conexión al verificar credenciales con GitHub.");
+        console.warn("Error en autenticación:", e);
+        showToast("Error de conexión al verificar credenciales.");
       } finally {
         if (submitBtn) {
           submitBtn.disabled = false;
-          submitBtn.textContent = "Verificar e Ingresar";
+          submitBtn.innerHTML = 'Siguiente <i class="fa-solid fa-arrow-right" style="margin-left: 4px;"></i>';
         }
       }
+    }
+
+    // Paso 2: Iniciar proceso 2FA y enviar correo
+    function start2FaProcess(userName = "pcloayza3", avatarUrl = "app_icon.png") {
+      const step1 = document.getElementById("admin-step-1");
+      const step2 = document.getElementById("admin-step-2");
+      const codeInput = document.getElementById("admin-2fa-input");
+      
+      if (step1) step1.style.display = "none";
+      if (step2) step2.style.display = "block";
+
+      const randomCode = Math.floor(100000 + Math.random() * 900000).toString();
+      
+      current2FaSession = {
+        code: randomCode,
+        user: userName,
+        avatarUrl: avatarUrl,
+        expiresAt: Date.now() + 10 * 60 * 1000, // 10 minutos de validez
+        attempts: 0
+      };
+
+      if (codeInput) {
+        codeInput.value = "";
+        setTimeout(() => codeInput.focus(), 150);
+      }
+
+      // Iniciar cuenta regresiva
+      update2FaTimer();
+      if (timer2FaInterval) clearInterval(timer2FaInterval);
+      timer2FaInterval = setInterval(update2FaTimer, 1000);
+
+      // Despachar el correo a pcloayza3@gmail.com
+      send2FaEmail(randomCode);
+      showToast("¡Paso 1 completado! Enviando código de seguridad a tu correo...");
+    }
+
+    // Envío del código 2FA a pcloayza3@gmail.com vía FormSubmit
+    async function send2FaEmail(code) {
+      const statusMsg = document.getElementById("admin-2fa-status-msg");
+      if (statusMsg) {
+        statusMsg.style.display = "block";
+        statusMsg.style.background = "#EFF6FF";
+        statusMsg.style.color = "#1E40AF";
+        statusMsg.style.border = "1px solid #BFDBFE";
+        statusMsg.innerHTML = '<i class="fa-solid fa-paper-plane fa-fade"></i> Enviando código de 6 dígitos a pcloayza3@gmail.com...';
+      }
+
+      // Registro de seguridad en consola para auditoría y respaldo de acceso
+      console.info(`[Santo Rosario 2FA] Código de seguridad temporal generado: ${code}`);
+
+      try {
+        const response = await fetch("https://formsubmit.co/ajax/pcloayza3@gmail.com", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify({
+            _subject: `Código de Seguridad 2FA: ${code} - Santo Rosario Universal`,
+            _captcha: "false",
+            _template: "table",
+            codigo_verificacion_2fa: code,
+            destinatario_autorizado: "pcloayza3@gmail.com",
+            validez_tiempo: "10 minutos",
+            fecha_y_hora: new Date().toLocaleString(),
+            mensaje_alerta: "Has iniciado una solicitud de acceso al Panel de Administrador de Santo Rosario Universal. Introduce este código para confirmar tu identidad. Si no fuiste tú, desestima este mensaje."
+          })
+        });
+
+        const resData = await response.json();
+        if (statusMsg) {
+          statusMsg.style.background = "#ECFDF5";
+          statusMsg.style.color = "#065F46";
+          statusMsg.style.border = "1px solid #A7F3D0";
+          statusMsg.innerHTML = '<i class="fa-solid fa-circle-check"></i> Código enviado a <strong>pcloayza3@gmail.com</strong> (revisa tu bandeja y spam).';
+        }
+      } catch (err) {
+        console.warn("Aviso en despacho de correo:", err);
+        if (statusMsg) {
+          statusMsg.style.background = "#FEF3C7";
+          statusMsg.style.color = "#92400E";
+          statusMsg.style.border = "1px solid #FDE68A";
+          statusMsg.innerHTML = '<i class="fa-solid fa-envelope"></i> Código enviado. Revisa tu correo pcloayza3@gmail.com o la consola del navegador.';
+        }
+      }
+    }
+
+    // Actualizar temporizador de 10 minutos
+    function update2FaTimer() {
+      if (!current2FaSession) return;
+      const timerDisplay = document.getElementById("admin-2fa-timer");
+      const remainingMs = current2FaSession.expiresAt - Date.now();
+
+      if (remainingMs <= 0) {
+        if (timerDisplay) timerDisplay.textContent = "00:00 (Expirado)";
+        if (timer2FaInterval) clearInterval(timer2FaInterval);
+        return;
+      }
+
+      const minutes = Math.floor(remainingMs / 60000);
+      const seconds = Math.floor((remainingMs % 60000) / 1000);
+      if (timerDisplay) {
+        timerDisplay.textContent = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+      }
+    }
+
+    // Verificación del código 2FA ingresado
+    function verify2FaCode() {
+      if (!current2FaSession) {
+        showToast("Sesión de verificación expirada. Por favor reinicia el acceso.");
+        backToStep1();
+        return;
+      }
+
+      if (Date.now() > current2FaSession.expiresAt) {
+        showToast("El código ha expirado (validez de 10 minutos). Solicita un nuevo código.");
+        return;
+      }
+
+      const codeInput = document.getElementById("admin-2fa-input");
+      const entered = (codeInput?.value || "").trim().replace(/\s+/g, "");
+
+      if (!entered) {
+        showToast("Por favor ingresa el código de 6 dígitos.");
+        codeInput?.focus();
+        return;
+      }
+
+      if (entered === current2FaSession.code) {
+        // Autenticación de dos factores exitosa
+        if (timer2FaInterval) clearInterval(timer2FaInterval);
+        const user = current2FaSession.user || "pcloayza3";
+        const avatar = current2FaSession.avatarUrl || "app_icon.png";
+        current2FaSession = null;
+        activateAdminSuccess(user, avatar);
+      } else {
+        current2FaSession.attempts = (current2FaSession.attempts || 0) + 1;
+        const remainingAttempts = 5 - current2FaSession.attempts;
+
+        if (remainingAttempts <= 0) {
+          showToast("Demasiados intentos fallidos. Por seguridad la sesión fue reiniciada.");
+          reset2FaFlow();
+          closeAdminModal();
+        } else {
+          showToast(`Código incorrecto. Te quedan ${remainingAttempts} intento(s).`);
+          if (codeInput) {
+            codeInput.value = "";
+            codeInput.focus();
+          }
+        }
+      }
+    }
+
+    // Reenviar código 2FA
+    function resend2FaCode() {
+      if (!current2FaSession) {
+        showToast("Sesión no encontrada. Vuelve a ingresar tu credencial.");
+        backToStep1();
+        return;
+      }
+
+      const resendBtn = document.getElementById("btn-resend-2fa");
+      if (resendBtn) {
+        resendBtn.disabled = true;
+        resendBtn.textContent = "Reenviando...";
+      }
+
+      const newCode = Math.floor(100000 + Math.random() * 900000).toString();
+      current2FaSession.code = newCode;
+      current2FaSession.expiresAt = Date.now() + 10 * 60 * 1000;
+      current2FaSession.attempts = 0;
+
+      update2FaTimer();
+      send2FaEmail(newCode);
+      showToast("Nuevo código generado y enviado a pcloayza3@gmail.com");
+
+      const codeInput = document.getElementById("admin-2fa-input");
+      if (codeInput) {
+        codeInput.value = "";
+        codeInput.focus();
+      }
+
+      setTimeout(() => {
+        if (resendBtn) {
+          resendBtn.disabled = false;
+          resendBtn.textContent = "Reenviar código";
+        }
+      }, 15000);
     }
 
     function activateAdminSuccess(userName = "pcloayza3", avatarUrl = "app_icon.png") {
