@@ -66,14 +66,20 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      padding: 12px 24px;
+      padding: 8px 24px;
     }
     .nav-container {
       max-width: 1160px;
       margin: 0 auto;
       display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .nav-main-row {
+      display: flex;
       justify-content: space-between;
       align-items: center;
+      width: 100%;
     }
     .brand {
       display: flex;
@@ -83,8 +89,8 @@
       color: var(--text-main);
     }
     .brand img {
-      width: 42px;
-      height: 42px;
+      width: 40px;
+      height: 40px;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
@@ -102,26 +108,17 @@
       font-weight: 700;
       margin-left: 6px;
       border: 1px solid rgba(212, 175, 55, 0.3);
+      vertical-align: middle;
     }
-    .nav-links {
+    .nav-main-actions {
       display: flex;
-      gap: 20px;
       align-items: center;
-    }
-    .nav-link {
-      text-decoration: none;
-      color: var(--text-muted);
-      font-weight: 600;
-      font-size: 0.92rem;
-      transition: color 0.2s;
-    }
-    .nav-link:hover {
-      color: var(--primary);
+      gap: 10px;
     }
     .btn-nav {
       background: var(--primary);
       color: white;
-      padding: 9px 18px;
+      padding: 8px 18px;
       border-radius: var(--radius-sm);
       text-decoration: none;
       font-weight: 700;
@@ -134,6 +131,58 @@
     .btn-nav:hover {
       background: var(--primary-dark);
       transform: translateY(-1px);
+    }
+    .nav-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      color: var(--text-main);
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .nav-toggle:hover {
+      background: #e2e8f0;
+      color: var(--primary);
+    }
+    .nav-sub-row {
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+      padding-top: 6px;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+    .nav-sub-links {
+      display: flex;
+      gap: 26px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .nav-link {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.88rem;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 6px;
+    }
+    .nav-link:hover {
+      color: var(--primary);
+      background: rgba(30, 58, 138, 0.05);
+    }
+    @keyframes navSlideDown {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* Container */
@@ -1043,6 +1092,50 @@
     }
 
     @media (max-width: 768px) {
+      .navbar {
+        padding: 8px 16px;
+      }
+      .brand img {
+        width: 36px;
+        height: 36px;
+      }
+      .brand-title {
+        font-size: 1rem;
+      }
+      .btn-nav {
+        padding: 7px 12px;
+        font-size: 0.82rem;
+        gap: 6px;
+      }
+      .nav-toggle {
+        display: inline-flex;
+      }
+      .nav-sub-row {
+        display: none;
+        border-top: 1px solid var(--border);
+        margin-top: 6px;
+        padding-top: 8px;
+      }
+      .nav-sub-row.open {
+        display: block;
+        animation: navSlideDown 0.2s ease-out;
+      }
+      .nav-sub-links {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+        padding-bottom: 4px;
+      }
+      .nav-sub-links .nav-link {
+        padding: 10px 14px;
+        font-size: 0.92rem;
+        border-radius: 8px;
+        background: #f8fafc;
+        border: 1px solid rgba(0, 0, 0, 0.04);
+      }
+      .nav-sub-links .nav-link:hover {
+        background: rgba(30, 58, 138, 0.08);
+      }
       .qr-banner-card {
         display: flex !important;
         flex-direction: column !important;
@@ -1139,22 +1232,34 @@
   <!-- Barra de Navegación -->
   <header class="navbar">
     <div class="nav-container">
-      <a href="#" class="brand">
-        <img src="app_icon.png" alt="Icono Santo Rosario Universal">
-        <div>
-          <span class="brand-title">Santo Rosario Universal</span>
-          <span class="brand-badge">v1.0.0</span>
-        </div>
-      </a>
-      <nav class="nav-links">
-        <a href="#descarga" class="nav-link">Descargas</a>
-        <a href="#guia" class="nav-link">Cómo Usar</a>
-        <a href="#donaciones" class="nav-link">Donaciones</a>
-        <a href="#comentarios" class="nav-link">Comentarios</a>
-        <a href="#autor" class="nav-link">Autor</a>
-        <a href="app/" class="btn-nav" target="_blank">
-          <i class="fa-solid fa-play"></i> Rezar Online
+      <!-- Primera Línea: Icono, Título, Versión y Botón Rezar Online -->
+      <div class="nav-main-row">
+        <a href="#" class="brand">
+          <img src="app_icon.png" alt="Icono Santo Rosario Universal">
+          <div>
+            <span class="brand-title">Santo Rosario Universal</span>
+            <span class="brand-badge">v1.0.0</span>
+          </div>
         </a>
+        <div class="nav-main-actions">
+          <a href="app/" class="btn-nav" target="_blank">
+            <i class="fa-solid fa-play"></i> <span>Rezar Online</span>
+          </a>
+          <button class="nav-toggle" id="nav-toggle" aria-label="Menú de navegación" onclick="toggleNavMenu()">
+            <i class="fa-solid fa-bars" id="nav-toggle-icon"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Segunda Línea (Desktop) / Menú Desplegable (Móvil) -->
+      <nav class="nav-sub-row" id="nav-sub-menu">
+        <div class="nav-sub-links">
+          <a href="#descarga" class="nav-link" onclick="closeNavMenu()"><i class="fa-solid fa-download"></i> Descargas</a>
+          <a href="#guia" class="nav-link" onclick="closeNavMenu()"><i class="fa-solid fa-book-open"></i> Cómo Usar</a>
+          <a href="#donaciones" class="nav-link" onclick="closeNavMenu()"><i class="fa-solid fa-heart"></i> Donaciones</a>
+          <a href="#comentarios" class="nav-link" onclick="closeNavMenu()"><i class="fa-solid fa-comments"></i> Comentarios</a>
+          <a href="#autor" class="nav-link" onclick="closeNavMenu()"><i class="fa-solid fa-user"></i> Autor</a>
+        </div>
       </nav>
     </div>
   </header>
@@ -1198,11 +1303,11 @@
         </div>
         <div class="qr-info-content">
           <h3>
-            <i class="fa-solid fa-qrcode" style="color: var(--accent);"></i>
-            Acceso Rápido & Código QR
+            <i class="fa-solid fa-gift" style="color: var(--accent);"></i>
+            Compartir este regalo con tus amigos
           </h3>
           <p>
-            Escanea este código con cualquier teléfono móvil para abrir la aplicación al instante, o copia y comparte este enlace con tu familia, parroquia y grupos de oración.
+            Escanea este código con cualquier teléfono móvil para abrir la aplicación al instante, o comparte este hermoso regalo con tu familia, amigos, parroquia y grupos de oración.
           </p>
 
           <div class="qr-link-box">
@@ -2079,6 +2184,46 @@
     document.getElementById("admin-pass-input")?.addEventListener("keydown", function(e) {
       if (e.key === "Enter") {
         verifyAdminPass();
+      }
+    });
+
+    // Control del menú de navegación (Segunda línea / Móvil)
+    function toggleNavMenu() {
+      const menu = document.getElementById("nav-sub-menu");
+      const icon = document.getElementById("nav-toggle-icon");
+      if (!menu) return;
+      const isOpen = menu.classList.toggle("open");
+      if (icon) {
+        if (isOpen) {
+          icon.classList.remove("fa-bars");
+          icon.classList.add("fa-xmark");
+        } else {
+          icon.classList.remove("fa-xmark");
+          icon.classList.add("fa-bars");
+        }
+      }
+    }
+
+    function closeNavMenu() {
+      const menu = document.getElementById("nav-sub-menu");
+      const icon = document.getElementById("nav-toggle-icon");
+      if (menu && menu.classList.contains("open")) {
+        menu.classList.remove("open");
+        if (icon) {
+          icon.classList.remove("fa-xmark");
+          icon.classList.add("fa-bars");
+        }
+      }
+    }
+
+    // Cerrar menú móvil al hacer click fuera
+    document.addEventListener("click", (e) => {
+      const menu = document.getElementById("nav-sub-menu");
+      const toggle = document.getElementById("nav-toggle");
+      if (menu && menu.classList.contains("open")) {
+        if (!menu.contains(e.target) && !toggle.contains(e.target)) {
+          closeNavMenu();
+        }
       }
     });
 
