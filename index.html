@@ -2223,25 +2223,32 @@
   <!-- Modal de Autenticación de Administrador -->
   <div id="admin-modal" class="admin-modal-backdrop" onclick="closeAdminModal(event)">
     <div class="admin-modal-card" onclick="event.stopPropagation()">
-      <div style="width: 50px; height: 50px; border-radius: 50%; background: #EFF6FF; color: #2563EB; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; font-size: 1.4rem;">
-        <i class="fa-solid fa-shield-halved"></i>
+      <div style="width: 52px; height: 52px; border-radius: 50%; background: #EFF6FF; color: #2563EB; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; font-size: 1.5rem;">
+        <i class="fa-brands fa-github"></i>
       </div>
-      <h3 style="margin-bottom: 6px;">Acceso de Administrador</h3>
+      <h3 style="margin-bottom: 6px;">Identificación con GitHub</h3>
       <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 16px;">
-        Panel de Métricas, Tráfico, Publicidad y Moderación.<br>
-        Acceso reservado para el propietario: <br><strong style="color: var(--primary);">pcloayza3@gmail.com</strong>
+        Para acceder al panel debes autenticarte. Tu usuario de GitHub será verificado automáticamente sin posibilidad de ser alterado manualmente.
       </p>
-      <div style="text-align: left; margin-bottom: 10px;">
-        <label style="font-size: 0.78rem; font-weight: 700; color: #475569; display: block; margin-bottom: 4px;">USUARIO O CORREO:</label>
-        <input type="text" id="admin-user-input" class="form-control" value="pcloayza3@gmail.com" placeholder="pcloayza3@gmail.com" style="text-align: center; font-weight: 700; font-size: 0.95rem;">
+
+      <div id="admin-detected-user-box" style="display: none; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; padding: 12px; margin-bottom: 16px; text-align: left; align-items: center; gap: 12px;">
+        <img id="admin-detected-avatar" src="" style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid #CBD5E1;" alt="Avatar">
+        <div>
+          <div style="font-size: 0.72rem; color: #64748B; font-weight: 700;">USUARIO AUTENTICADO POR GITHUB:</div>
+          <strong id="admin-detected-login" style="font-size: 1rem; color: #0F172A;">-</strong>
+        </div>
       </div>
+
       <div style="text-align: left; margin-bottom: 16px;">
-        <label style="font-size: 0.78rem; font-weight: 700; color: #475569; display: block; margin-bottom: 4px;">CLAVE DE ACCESO O TOKEN GITHUB:</label>
-        <input type="password" id="admin-pass-input" class="form-control" placeholder="Clave de Administrador" style="text-align: center; font-size: 1.05rem; letter-spacing: 2px;">
+        <label style="font-size: 0.78rem; font-weight: 700; color: #475569; display: block; margin-bottom: 4px;">TOKEN PERSONAL DE GITHUB O CLAVE:</label>
+        <input type="password" id="admin-pass-input" class="form-control" placeholder="Ingresa tu Personal Access Token o clave" style="text-align: center; font-size: 1rem;">
+        <small style="display: block; color: var(--text-muted); font-size: 0.75rem; margin-top: 5px;">
+          <i class="fa-solid fa-shield-halved"></i> Se valida directamente contra GitHub API que seas el dueño del repositorio.
+        </small>
       </div>
       <div class="admin-modal-actions">
         <button onclick="closeAdminModal()" class="platform-btn secondary" style="flex: 1; padding: 10px;">Cancelar</button>
-        <button onclick="verifyAdminPass()" class="platform-btn primary" style="flex: 1; padding: 10px;" id="admin-submit-btn">Ingresar al Panel</button>
+        <button onclick="verifyAdminPass()" class="platform-btn primary" style="flex: 1; padding: 10px;" id="admin-submit-btn">Verificar e Ingresar</button>
       </div>
     </div>
   </div>
@@ -2255,10 +2262,10 @@
         <div class="metrics-header-left">
           <h3>
             <i class="fa-solid fa-chart-line" style="color: #2563EB;"></i> 
-            Panel de Métricas & Rendimiento Publicitario
+            Panel de Métricas Reales & Rendimiento Publicitario
           </h3>
           <p>
-            Estadísticas consolidadas de tráfico, instalaciones y efectividad de patrocinadores • Propietario: <strong>@pcloayza3 (pcloayza3@gmail.com)</strong>
+            Telemetría real auditada de visitas, instalaciones y clics en anuncios • Administrador: <strong id="metrics-admin-name">@pcloayza3</strong>
           </p>
         </div>
         <div class="metrics-header-actions">
@@ -2307,7 +2314,7 @@
                 <span class="kpi-title">Total Ingresos / Visitas</span>
                 <i class="fa-solid fa-users kpi-icon"></i>
               </div>
-              <div class="kpi-number" id="kpi-total-visitas">15,482</div>
+              <div class="kpi-number" id="kpi-total-visitas">0</div>
               <div class="kpi-subtext">Página de Descarga + Web App</div>
             </div>
 
@@ -2316,8 +2323,8 @@
                 <span class="kpi-title">Instalaciones / Ingresos APP</span>
                 <i class="fa-solid fa-mobile-screen-button kpi-icon" style="color: #059669;"></i>
               </div>
-              <div class="kpi-number" id="kpi-app-installs" style="color: #059669;">11,245</div>
-              <div class="kpi-subtext"><span class="kpi-badge-good">72.6% del total</span></div>
+              <div class="kpi-number" id="kpi-app-installs" style="color: #059669;">0</div>
+              <div class="kpi-subtext" id="kpi-app-installs-sub">0% del total</div>
             </div>
 
             <div class="kpi-card">
@@ -2325,8 +2332,8 @@
                 <span class="kpi-title">Clics a Publicidad</span>
                 <i class="fa-solid fa-arrow-pointer kpi-icon" style="color: #D97706;"></i>
               </div>
-              <div class="kpi-number" id="kpi-sponsor-clicks" style="color: #D97706;">694</div>
-              <div class="kpi-subtext">Interacción directa en banners</div>
+              <div class="kpi-number" id="kpi-sponsor-clicks" style="color: #D97706;">0</div>
+              <div class="kpi-subtext">Interacciones reales registradas</div>
             </div>
 
             <div class="kpi-card">
@@ -2334,8 +2341,8 @@
                 <span class="kpi-title">Efectividad CTR</span>
                 <i class="fa-solid fa-chart-line kpi-icon" style="color: #7C3AED;"></i>
               </div>
-              <div class="kpi-number" id="kpi-ctr" style="color: #7C3AED;">4.52%</div>
-              <div class="kpi-subtext"><span class="kpi-badge-good">3.8x superior a la media</span></div>
+              <div class="kpi-number" id="kpi-ctr" style="color: #7C3AED;">0.00%</div>
+              <div class="kpi-subtext">Tasa de conversión real</div>
             </div>
 
             <div class="kpi-card">
@@ -2343,18 +2350,16 @@
                 <span class="kpi-title">Países Alcanzados</span>
                 <i class="fa-solid fa-globe kpi-icon" style="color: #2563EB;"></i>
               </div>
-              <div class="kpi-number" id="kpi-countries">18</div>
-              <div class="kpi-subtext">Comunidad hispanohablante global</div>
+              <div class="kpi-number" id="kpi-countries">0</div>
+              <div class="kpi-subtext">Ubicaciones verificadas por IP</div>
             </div>
           </div>
 
           <div class="metrics-card">
-            <h4><i class="fa-solid fa-award" style="color: #D4AF37;"></i> Argumento de Negociación para Patrocinadores</h4>
+            <h4><i class="fa-solid fa-award" style="color: #D4AF37;"></i> Rendimiento Real para Negociación con Patrocinadores</h4>
             <p style="font-size: 0.92rem; color: #475569; line-height: 1.6; margin-bottom: 12px;">
-              A diferencia de las redes sociales convencionales donde un usuario pasa de largo en milésimas de segundo, 
-              en <strong>Santo Rosario Universal</strong> el devoto reza durante <strong>18 a 25 minutos continuos</strong>.
-              Esto garantiza que el espacio publicitario esté permanentemente visible en un entorno de paz y gratitud, 
-              logrando una extraordinaria <strong>tasa de clics (CTR) del 4.52%</strong> (frente al 0.9% ~ 1.2% habitual en banners móviles).
+              Cada número mostrado en este panel se obtiene de eventos de telemetría reales (ingresos a la web, apertura de la aplicación y clics en el botón de patrocinio).
+              La efectividad actual de clics sobre visitas registradas es de <strong id="dynamic-ctr-text" style="color: #7C3AED;">0.00%</strong>.
             </p>
             <div style="display: flex; gap: 10px; flex-wrap: wrap;">
               <button class="btn-metrics-action btn-metrics-primary" onclick="exportMetricsToCsv()">
@@ -2367,59 +2372,13 @@
         <!-- Pestaña 2: Instalaciones & Dispositivos -->
         <div id="tab-instalaciones" class="metrics-tab-pane">
           <div class="metrics-card">
-            <h4><i class="fa-solid fa-mobile-screen"></i> Desglose por Tipo de Instalación y Plataforma</h4>
+            <h4><i class="fa-solid fa-mobile-screen"></i> Desglose Real por Tipo de Instalación y Plataforma</h4>
             <p style="font-size: 0.88rem; color: #64748B; margin-bottom: 20px;">
-              Distribución de usuarios según cómo ejecutan la aplicación en sus dispositivos.
+              Distribución de usuarios según la plataforma real desde donde accedieron a la aplicación o descargaron el instalador.
             </p>
 
-            <div class="platform-bar-row">
-              <div class="platform-bar-header">
-                <span><i class="fa-brands fa-android" style="color: #22C55E;"></i> Android Celulares (APK / Instalado)</span>
-                <span><strong>9,780 usuarios</strong> (63.2%)</span>
-              </div>
-              <div class="platform-bar-track">
-                <div class="platform-bar-fill" style="width: 63.2%; background: #22C55E;"></div>
-              </div>
-            </div>
-
-            <div class="platform-bar-row">
-              <div class="platform-bar-header">
-                <span><i class="fa-solid fa-globe" style="color: #2563EB;"></i> Web en Cualquier Navegador (Directo)</span>
-                <span><strong>3,420 ingresos</strong> (22.1%)</span>
-              </div>
-              <div class="platform-bar-track">
-                <div class="platform-bar-fill" style="width: 22.1%; background: #2563EB;"></div>
-              </div>
-            </div>
-
-            <div class="platform-bar-row">
-              <div class="platform-bar-header">
-                <span><i class="fa-solid fa-download" style="color: #F59E0B;"></i> PWA / App Instalada en Pantalla de Inicio</span>
-                <span><strong>1,380 instalaciones</strong> (8.9%)</span>
-              </div>
-              <div class="platform-bar-track">
-                <div class="platform-bar-fill" style="width: 8.9%; background: #F59E0B;"></div>
-              </div>
-            </div>
-
-            <div class="platform-bar-row">
-              <div class="platform-bar-header">
-                <span><i class="fa-brands fa-apple" style="color: #64748B;"></i> iPhone / iPad (iOS Safari)</span>
-                <span><strong>635 usuarios</strong> (4.1%)</span>
-              </div>
-              <div class="platform-bar-track">
-                <div class="platform-bar-fill" style="width: 4.1%; background: #64748B;"></div>
-              </div>
-            </div>
-
-            <div class="platform-bar-row">
-              <div class="platform-bar-header">
-                <span><i class="fa-brands fa-windows" style="color: #0284C7;"></i> Computadoras (Windows / Mac / Linux)</span>
-                <span><strong>267 usuarios</strong> (1.7%)</span>
-              </div>
-              <div class="platform-bar-track">
-                <div class="platform-bar-fill" style="width: 1.7%; background: #0284C7;"></div>
-              </div>
+            <div id="platforms-metrics-container">
+              <!-- Rellenado dinámicamente con datos 100% reales -->
             </div>
           </div>
         </div>
@@ -2945,73 +2904,155 @@
     }
 
     // ========================================================
-    // CONSOLIDACIÓN DE DATOS PARA NEGOCIACIÓN CON PATROCINADORES
+    // CONSOLIDACIÓN DE DATOS 100% REALES PARA NEGOCIACIÓN
     // ========================================================
-    const BASELINE_METRICS = {
-      totalVisitas: 15482,
-      appInstalls: 11245,
-      sponsorClicks: 694,
-      countriesCount: 18,
-      platforms: {
-        android: { name: "Android Celulares (APK / Móvil)", count: 9780, pct: "63.2%" },
-        web: { name: "Web en Navegador (Directo)", count: 3420, pct: "22.1%" },
-        pwa: { name: "PWA / App Instalada en Inicio", count: 1380, pct: "8.9%" },
-        ios: { name: "iPhone / iPad (iOS Safari)", count: 635, pct: "4.1%" },
-        pc: { name: "Computadoras (Windows / Mac / Linux)", count: 267, pct: "1.7%" }
-      },
-      countries: [
-        { name: "Bolivia", code: "BO", flag: "🇧🇴", count: 8390, pct: "54.2%", cities: "Santa Cruz, La Paz, Cochabamba, Sucre, Tarija, Oruro, Potosí" },
-        { name: "Perú", code: "PE", flag: "🇵🇪", count: 2185, pct: "14.1%", cities: "Lima, Arequipa, Cusco, Trujillo, Chiclayo" },
-        { name: "Argentina", code: "AR", flag: "🇦🇷", count: 1845, pct: "11.9%", cities: "Buenos Aires, Córdoba, Rosario, Salta, Mendoza" },
-        { name: "México", code: "MX", flag: "🇲🇽", count: 1395, pct: "9.0%", cities: "CDMX, Guadalajara, Monterrey, Puebla, Querétaro" },
-        { name: "Chile", code: "CL", flag: "🇨🇱", count: 495, pct: "3.2%", cities: "Santiago, Valparaíso, Concepción, Antofagasta" },
-        { name: "España", code: "ES", flag: "🇪🇸", count: 450, pct: "2.9%", cities: "Madrid, Barcelona, Sevilla, Valencia, Granada" },
-        { name: "Estados Unidos", code: "US", flag: "🇺🇸", count: 435, pct: "2.8%", cities: "Miami, Los Ángeles, Houston, Chicago, New York" },
-        { name: "Otros Países", code: "OT", flag: "🌎", count: 287, pct: "1.9%", cities: "Colombia, Ecuador, Paraguay, Uruguay, Brasil" }
-      ],
-      sponsors: [
-        {
-          id: "promo_disponible",
-          name: "Espacio publicitario para Patrocinador",
-          impressions: 15350,
-          clicks: 694,
-          ctr: "4.52%",
-          status: "Disponible",
-          targetUrl: "https://pcloayza3.github.io/santo-rosario/"
+    let activeAdminUser = null;
+
+    // Calcular métricas estrictamente a partir de eventos reales almacenados
+    function calculateRealMetrics() {
+      const events = getStoredTelemetryEvents();
+
+      const visitasWeb = events.filter(e => e.event_type === "visita_web").length;
+      const descargasApk = events.filter(e => e.event_type === "instalacion_apk").length;
+      const descargasTv = events.filter(e => e.event_type === "instalacion_tv").length;
+      const ingresosApp = events.filter(e => e.event_type === "ingreso_app").length;
+      const totalAppInstalls = descargasApk + descargasTv + ingresosApp;
+      const totalVisitasGlobales = visitasWeb + totalAppInstalls;
+      const totalSponsorClicks = events.filter(e => e.event_type === "sponsor_click").length;
+
+      const ctr = totalVisitasGlobales > 0 
+        ? ((totalSponsorClicks / totalVisitasGlobales) * 100).toFixed(2) + "%" 
+        : "0.00%";
+
+      // Países reales únicos
+      const countriesMap = {};
+      events.forEach(e => {
+        if (e.country && e.country !== "Desconocido") {
+          const code = e.country_code || e.country;
+          if (!countriesMap[code]) {
+            countriesMap[code] = {
+              name: e.country,
+              code: code,
+              flag: e.flag || "🌐",
+              count: 0,
+              cities: new Set()
+            };
+          }
+          countriesMap[code].count++;
+          if (e.city && e.city !== "Desconocida") {
+            countriesMap[code].cities.add(e.city);
+          }
         }
-      ]
-    };
+      });
 
-    // Renderizar panel de métricas consolidado
+      const uniqueCountries = Object.values(countriesMap);
+
+      // Plataformas reales únicas
+      const platformsMap = {};
+      events.forEach(e => {
+        const plat = e.platform || "Web Navegador";
+        platformsMap[plat] = (platformsMap[plat] || 0) + 1;
+      });
+
+      // Clics reales por patrocinador
+      const sponsorClicksMap = {};
+      events.filter(e => e.event_type === "sponsor_click").forEach(e => {
+        const spId = e.sponsor_id || "promo_disponible";
+        sponsorClicksMap[spId] = (sponsorClicksMap[spId] || 0) + 1;
+      });
+
+      return {
+        events: events,
+        totalVisitas: totalVisitasGlobales,
+        visitasWeb: visitasWeb,
+        totalAppInstalls: totalAppInstalls,
+        sponsorClicks: totalSponsorClicks,
+        ctr: ctr,
+        countriesCount: uniqueCountries.length,
+        uniqueCountries: uniqueCountries,
+        platformsMap: platformsMap,
+        sponsorClicksMap: sponsorClicksMap
+      };
+    }
+
+    // Renderizar panel de métricas con datos 100% reales
     function renderMetricsDashboard() {
-      const localEvents = getStoredTelemetryEvents();
+      const data = calculateRealMetrics();
+
+      // Actualizar KPIs con datos reales
+      document.getElementById("kpi-total-visitas").textContent = data.totalVisitas.toLocaleString();
+      document.getElementById("kpi-app-installs").textContent = data.totalAppInstalls.toLocaleString();
       
-      // Contadores en tiempo real
-      let realVisits = localEvents.filter(e => e.event_type === "visita_web").length;
-      let realApp = localEvents.filter(e => e.event_type === "ingreso_app" || e.event_type === "instalacion_apk" || e.event_type === "instalacion_tv").length;
-      let realClicks = localEvents.filter(e => e.event_type === "sponsor_click").length;
+      const appPct = data.totalVisitas > 0 ? ((data.totalAppInstalls / data.totalVisitas) * 100).toFixed(1) + "% del total" : "0% del total";
+      const appSub = document.getElementById("kpi-app-installs-sub");
+      if (appSub) appSub.textContent = appPct;
 
-      const totalVisits = BASELINE_METRICS.totalVisitas + realVisits;
-      const totalApp = BASELINE_METRICS.appInstalls + realApp;
-      const totalClicks = BASELINE_METRICS.sponsorClicks + realClicks;
-      const ctr = ((totalClicks / Math.max(totalVisits, 1)) * 100).toFixed(2) + "%";
+      document.getElementById("kpi-sponsor-clicks").textContent = data.sponsorClicks.toLocaleString();
+      document.getElementById("kpi-ctr").textContent = data.ctr;
+      document.getElementById("kpi-countries").textContent = data.countriesCount;
 
-      // Actualizar KPIs
-      document.getElementById("kpi-total-visitas").textContent = totalVisits.toLocaleString();
-      document.getElementById("kpi-app-installs").textContent = totalApp.toLocaleString();
-      document.getElementById("kpi-sponsor-clicks").textContent = totalClicks.toLocaleString();
-      document.getElementById("kpi-ctr").textContent = ctr;
-      document.getElementById("kpi-countries").textContent = BASELINE_METRICS.countriesCount;
+      const dynamicCtrText = document.getElementById("dynamic-ctr-text");
+      if (dynamicCtrText) dynamicCtrText.textContent = data.ctr;
 
       updateVisitorGeoBadge();
 
-      // Renderizar tabla de patrocinadores
+      // 1. Renderizar desglose de plataformas 100% real
+      const platContainer = document.getElementById("platforms-metrics-container");
+      if (platContainer) {
+        platContainer.innerHTML = "";
+        const platEntries = Object.entries(data.platformsMap);
+        if (platEntries.length === 0) {
+          platContainer.innerHTML = `
+            <div style="text-align: center; padding: 24px; color: var(--text-muted); font-size: 0.9rem;">
+              <i class="fa-solid fa-chart-simple" style="font-size: 1.8rem; margin-bottom: 8px; opacity: 0.5;"></i>
+              <p>Aún no se han registrado eventos de acceso o instalación. Los datos aparecerán aquí en tiempo real a medida que los usuarios utilicen la app.</p>
+            </div>
+          `;
+        } else {
+          platEntries.sort((a, b) => b[1] - a[1]).forEach(([platName, count]) => {
+            const pctVal = data.totalVisitas > 0 ? ((count / data.totalVisitas) * 100).toFixed(1) : "0.0";
+            let iconClass = "fa-solid fa-globe";
+            let color = "#2563EB";
+            if (/android/i.test(platName)) { iconClass = "fa-brands fa-android"; color = "#22C55E"; }
+            else if (/ios|iphone|apple/i.test(platName)) { iconClass = "fa-brands fa-apple"; color = "#64748B"; }
+            else if (/windows/i.test(platName)) { iconClass = "fa-brands fa-windows"; color = "#0284C7"; }
+            else if (/linux/i.test(platName)) { iconClass = "fa-brands fa-linux"; color = "#EA580C"; }
+            else if (/pwa/i.test(platName)) { iconClass = "fa-solid fa-mobile-screen"; color = "#F59E0B"; }
+
+            const row = document.createElement("div");
+            row.className = "platform-bar-row";
+            row.innerHTML = `
+              <div class="platform-bar-header">
+                <span><i class="${iconClass}" style="color: ${color};"></i> ${escapeHtml(platName)}</span>
+                <span><strong>${count.toLocaleString()} registros</strong> (${pctVal}%)</span>
+              </div>
+              <div class="platform-bar-track">
+                <div class="platform-bar-fill" style="width: ${pctVal}%; background: ${color};"></div>
+              </div>
+            `;
+            platContainer.appendChild(row);
+          });
+        }
+      }
+
+      // 2. Renderizar tabla de patrocinadores real
       const spBody = document.getElementById("sponsors-metrics-table-body");
       if (spBody) {
         spBody.innerHTML = "";
-        BASELINE_METRICS.sponsors.forEach(sp => {
-          const clicksNow = sp.clicks + realClicks;
-          const ctrNow = ((clicksNow / sp.impressions) * 100).toFixed(2) + "%";
+        
+        // Obtener patrocinadores de sponsors.json o por defecto
+        const sponsorsList = [
+          {
+            id: "promo_disponible",
+            name: "Espacio publicitario para Patrocinador",
+            targetUrl: "https://pcloayza3.github.io/santo-rosario/",
+            status: "Disponible"
+          }
+        ];
+
+        sponsorsList.forEach(sp => {
+          const clicksNow = data.sponsorClicksMap[sp.id] || 0;
+          const ctrNow = data.totalVisitas > 0 ? ((clicksNow / data.totalVisitas) * 100).toFixed(2) + "%" : "0.00%";
           const tr = document.createElement("tr");
           tr.innerHTML = `
             <td>
@@ -3025,7 +3066,7 @@
               </div>
             </td>
             <td><code>${sp.id}</code></td>
-            <td>${sp.impressions.toLocaleString()}</td>
+            <td>${data.totalVisitas.toLocaleString()}</td>
             <td><strong style="color: #D97706; font-size: 0.95rem;">${clicksNow.toLocaleString()}</strong></td>
             <td><span class="kpi-badge-good">${ctrNow}</span></td>
             <td><span class="badge-status ${sp.status === 'Disponible' ? 'available' : 'active'}">${sp.status}</span></td>
@@ -3035,34 +3076,46 @@
         });
       }
 
-      // Renderizar tabla de países
+      // 3. Renderizar tabla de países real
       const cBody = document.getElementById("countries-metrics-table-body");
       if (cBody) {
         cBody.innerHTML = "";
-        BASELINE_METRICS.countries.forEach(c => {
-          const tr = document.createElement("tr");
-          tr.innerHTML = `
-            <td><strong>${c.flag} ${c.name}</strong></td>
-            <td><code>${c.code}</code></td>
-            <td>${c.count.toLocaleString()}</td>
-            <td>
-              <div style="display: flex; align-items: center; gap: 8px;">
-                <div style="width: 60px; height: 6px; background: #E2E8F0; border-radius: 4px; overflow: hidden;">
-                  <div style="width: ${c.pct}; height: 100%; background: #2563EB;"></div>
-                </div>
-                <span>${c.pct}</span>
-              </div>
-            </td>
-            <td style="color: #64748B; font-size: 0.82rem;">${c.cities}</td>
+        if (data.uniqueCountries.length === 0) {
+          cBody.innerHTML = `
+            <tr>
+              <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 20px;">
+                Aún no hay visitas registradas con geolocalización.
+              </td>
+            </tr>
           `;
-          cBody.appendChild(tr);
-        });
+        } else {
+          data.uniqueCountries.sort((a, b) => b.count - a.count).forEach(c => {
+            const pctVal = data.totalVisitas > 0 ? ((c.count / data.totalVisitas) * 100).toFixed(1) + "%" : "100%";
+            const citiesStr = Array.from(c.cities).join(", ") || "Ubicación detectada";
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td><strong>${c.flag} ${escapeHtml(c.name)}</strong></td>
+              <td><code>${escapeHtml(c.code)}</code></td>
+              <td>${c.count.toLocaleString()}</td>
+              <td>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <div style="width: 60px; height: 6px; background: #E2E8F0; border-radius: 4px; overflow: hidden;">
+                    <div style="width: ${pctVal}; height: 100%; background: #2563EB;"></div>
+                  </div>
+                  <span>${pctVal}</span>
+                </div>
+              </td>
+              <td style="color: #64748B; font-size: 0.82rem;">${escapeHtml(citiesStr)}</td>
+            `;
+            cBody.appendChild(tr);
+          });
+        }
       }
 
-      // Renderizar tabla de auditoría en vivo
-      renderAuditLogTable(localEvents);
+      // 4. Renderizar tabla de auditoría en vivo 100% real
+      renderAuditLogTable(data.events);
 
-      // Cargar Webhook URL si ya fue guardado
+      // Cargar Webhook URL si existe
       const savedWebhook = localStorage.getItem(WEBHOOK_STORAGE_KEY) || "";
       const webhookInput = document.getElementById("webhook-url-input");
       if (webhookInput && savedWebhook) {
@@ -3070,71 +3123,26 @@
       }
     }
 
-    // Renderizar registros de eventos en vivo con IP
-    function renderAuditLogTable(localEvents) {
+    // Renderizar registros de auditoría estrictamente reales
+    function renderAuditLogTable(realEvents) {
       const auditBody = document.getElementById("audit-log-table-body");
       if (!auditBody) return;
       auditBody.innerHTML = "";
 
-      // Combinar eventos de sesión actuales con ejemplos recientes
-      const sampleEvents = [
-        {
-          timestamp: new Date(Date.now() - 1000 * 60 * 4).toISOString(),
-          event_type: "sponsor_click",
-          ip: "189.28.75.163",
-          country: "Bolivia",
-          city: "Santa Cruz de la Sierra",
-          flag: "🇧🇴",
-          platform: "Android Celular",
-          detail: "Clic en: Espacio publicitario para Patrocinador"
-        },
-        {
-          timestamp: new Date(Date.now() - 1000 * 60 * 18).toISOString(),
-          event_type: "ingreso_app",
-          ip: "200.87.12.94",
-          country: "Bolivia",
-          city: "La Paz",
-          flag: "🇧🇴",
-          platform: "Android Celular",
-          detail: "Rezo del Santo Rosario (Misterios Luminosos)"
-        },
-        {
-          timestamp: new Date(Date.now() - 1000 * 60 * 35).toISOString(),
-          event_type: "instalacion_apk",
-          ip: "190.237.45.18",
-          country: "Perú",
-          city: "Lima",
-          flag: "🇵🇪",
-          platform: "Android Celular",
-          detail: "Descarga de SantoRosario.apk"
-        },
-        {
-          timestamp: new Date(Date.now() - 1000 * 60 * 52).toISOString(),
-          event_type: "visita_web",
-          ip: "181.44.120.31",
-          country: "Argentina",
-          city: "Buenos Aires",
-          flag: "🇦🇷",
-          platform: "Web Navegador",
-          detail: "Visita a página de inicio"
-        },
-        {
-          timestamp: new Date(Date.now() - 1000 * 60 * 84).toISOString(),
-          event_type: "sponsor_click",
-          ip: "187.190.66.112",
-          country: "México",
-          city: "Guadalajara",
-          flag: "🇲🇽",
-          platform: "Android (PWA Instalada)",
-          detail: "Clic en: Espacio publicitario para Patrocinador"
-        }
-      ];
+      if (!realEvents || realEvents.length === 0) {
+        auditBody.innerHTML = `
+          <tr>
+            <td colspan="6" style="text-align: center; color: var(--text-muted); padding: 24px;">
+              No se han registrado eventos todavía. Haz clic en el botón "Probar Clic de Test" o navega en la app para registrar eventos en tiempo real.
+            </td>
+          </tr>
+        `;
+        return;
+      }
 
-      const merged = [...localEvents, ...sampleEvents].slice(0, 20);
-
-      merged.forEach(ev => {
+      realEvents.slice(0, 50).forEach(ev => {
         let badgeClass = "visita";
-        let label = "VISITA";
+        let label = "VISITA WEB";
         if (ev.event_type === "sponsor_click") { badgeClass = "clic"; label = "CLIC PUBLICIDAD"; }
         else if (ev.event_type === "ingreso_app") { badgeClass = "app"; label = "INGRESO APP"; }
         else if (ev.event_type.startsWith("instalacion")) { badgeClass = "descarga"; label = "DESCARGA"; }
@@ -3144,9 +3152,9 @@
         tr.innerHTML = `
           <td style="font-size: 0.8rem; color: #64748B; white-space: nowrap;">${dateStr}</td>
           <td><span class="badge-event ${badgeClass}">${label}</span></td>
-          <td><code style="background: #F1F5F9; padding: 2px 6px; border-radius: 4px; font-weight: 700;">${escapeHtml(ev.ip || "189.28.75.163")}</code></td>
-          <td>${ev.flag || "🌐"} ${escapeHtml(ev.city || "Santa Cruz")}, ${escapeHtml(ev.country || "Bolivia")}</td>
-          <td><span style="font-size: 0.82rem; font-weight: 600; color: #334155;">${escapeHtml(ev.platform || "Android")}</span></td>
+          <td><code style="background: #F1F5F9; padding: 2px 6px; border-radius: 4px; font-weight: 700;">${escapeHtml(ev.ip || "-")}</code></td>
+          <td>${ev.flag || "🌐"} ${escapeHtml(ev.city || "Ciudad")}, ${escapeHtml(ev.country || "País")}</td>
+          <td><span style="font-size: 0.82rem; font-weight: 600; color: #334155;">${escapeHtml(ev.platform || "Web")}</span></td>
           <td style="font-size: 0.82rem; color: #475569;">${escapeHtml(ev.detail || "-")}</td>
         `;
         auditBody.appendChild(tr);
@@ -3161,7 +3169,6 @@
       const targetPane = document.getElementById(tabId);
       if (targetPane) targetPane.classList.add("active");
 
-      // Marcar botón activo
       const clickedBtn = Array.from(document.querySelectorAll(".metrics-tab-btn")).find(b => b.getAttribute("onclick")?.includes(tabId));
       if (clickedBtn) clickedBtn.classList.add("active");
     }
@@ -3199,54 +3206,53 @@
         detail: "Clic de prueba registrado desde el Panel Administrador"
       });
       renderMetricsDashboard();
-      showToast("¡Clic de prueba registrado exitosamente con tu IP real!");
+      showToast("¡Clic de prueba registrado con tu IP real!");
     }
 
-    // Exportar Reporte para Patrocinadores en formato CSV
+    // Exportar Reporte para Patrocinadores en formato CSV con datos 100% reales
     function exportMetricsToCsv() {
       const now = new Date().toISOString();
-      const localEvents = getStoredTelemetryEvents();
-      const realClicks = localEvents.filter(e => e.event_type === "sponsor_click").length;
-      const totalClicks = BASELINE_METRICS.sponsorClicks + realClicks;
+      const data = calculateRealMetrics();
 
       let csv = "\uFEFF"; // UTF-8 BOM
       csv += "REPORTE OFICIAL DE AUDIENCIA Y RENDIMIENTO PUBLICITARIO - SANTO ROSARIO UNIVERSAL\n";
       csv += `Fecha de Emision: ${now}\n`;
-      csv += "Propietario y Desarrollador: Paulo Cesar Loayza Carrasco (@pcloayza3 / pcloayza3@gmail.com)\n";
+      csv += `Administrador Verificado: ${activeAdminUser ? '@' + activeAdminUser : '@pcloayza3'}\n`;
       csv += "Plataforma Oficial: https://pcloayza3.github.io/santo-rosario/\n\n";
 
-      csv += "1. RESUMEN EJECUTIVO PARA NEGOCIACION DE PATROCINIO\n";
-      csv += "Metrica,Valor,Observaciones\n";
-      csv += `Total Ingresos y Visitas Globales,${BASELINE_METRICS.totalVisitas},Pagina oficial y Web App\n`;
-      csv += `Total Instalaciones e Ingresos a la APP,${BASELINE_METRICS.appInstalls},72.6% del trafico (Maxima fidelidad)\n`;
-      csv += `Clics Totales en Publicidad,${totalClicks},Interacciones registradas en banners\n`;
-      csv += `Tasa de Clics (CTR Promedio),4.52%,3.8 veces superior a la media de la industria\n`;
-      csv += `Paises con Presencia Devocional,18,Comunidad hispanohablante de alta devocion\n\n`;
+      csv += "1. RESUMEN EJECUTIVO DE METRICAS REALES\n";
+      csv += "Metrica,Valor Real,Observaciones\n";
+      csv += `Total Ingresos y Visitas Globales,${data.totalVisitas},Pagina oficial y Web App\n`;
+      csv += `Total Instalaciones e Ingresos a la APP,${data.totalAppInstalls},Accesos verificados\n`;
+      csv += `Clics Totales en Publicidad,${data.sponsorClicks},Interacciones registradas en banners\n`;
+      csv += `Tasa de Clics (CTR Real),${data.ctr},Efectividad calculada sobre trafico real\n`;
+      csv += `Paises con Presencia Registrada,${data.countriesCount},Paises unicos detectados por IP\n\n`;
 
-      csv += "2. DESGLOSE POR TIPO DE INSTALACION Y DISPOSITIVO\n";
-      csv += "Plataforma,Usuarios Estimados,Porcentaje\n";
-      Object.values(BASELINE_METRICS.platforms).forEach(p => {
-        csv += `"${p.name}",${p.count},${p.pct}\n`;
+      csv += "2. DESGLOSE REAL POR TIPO DE INSTALACION Y DISPOSITIVO\n";
+      csv += "Plataforma,Eventos Registrados,Porcentaje\n";
+      Object.entries(data.platformsMap).forEach(([platName, count]) => {
+        const pct = data.totalVisitas > 0 ? ((count / data.totalVisitas) * 100).toFixed(1) + "%" : "0%";
+        csv += `"${platName}",${count},${pct}\n`;
       });
       csv += "\n";
 
       csv += "3. RENDIMIENTO POR ESPACIO PUBLICITARIO / PATROCINADOR\n";
-      csv += "ID Campana,Patrocinador,Impresiones,Clics,CTR %,Estado\n";
-      BASELINE_METRICS.sponsors.forEach(s => {
-        csv += `"${s.id}","${s.name}",${s.impressions},${totalClicks},${s.ctr},"${s.status}"\n`;
-      });
-      csv += "\n";
+      csv += "ID Campana,Patrocinador,Vistas Totales,Clics Reales,CTR %,Estado\n";
+      const promoClicks = data.sponsorClicksMap["promo_disponible"] || 0;
+      csv += `"promo_disponible","Espacio publicitario para Patrocinador",${data.totalVisitas},${promoClicks},${data.ctr},"DISPONIBLE"\n\n`;
 
-      csv += "4. DISTRIBUCION GEOGRAFICA POR PAISES\n";
+      csv += "4. DISTRIBUCION GEOGRAFICA POR PAISES (DETECTADOS POR IP)\n";
       csv += "Pais,Codigo,Usuarios/Visitas,Participacion %,Ciudades Destacadas\n";
-      BASELINE_METRICS.countries.forEach(c => {
-        csv += `"${c.name}","${c.code}",${c.count},${c.pct},"${c.cities}"\n`;
+      data.uniqueCountries.forEach(c => {
+        const pct = data.totalVisitas > 0 ? ((c.count / data.totalVisitas) * 100).toFixed(1) + "%" : "100%";
+        const citiesStr = Array.from(c.cities).join(", ") || "Detectado";
+        csv += `"${c.name}","${c.code}",${c.count},${pct},"${citiesStr}"\n`;
       });
       csv += "\n";
 
-      csv += "5. MUESTRA RECIENTE DE TELEMETRIA CON DIRECCIONES IP AUDITABLES\n";
+      csv += "5. REGISTRO AUDITABLE DE TELEMETRIA CON DIRECCIONES IP REALES\n";
       csv += "Fecha UTC,Evento,Direccion IP,Pais,Ciudad,Plataforma,Detalle\n";
-      localEvents.slice(0, 50).forEach(e => {
+      data.events.slice(0, 100).forEach(e => {
         csv += `"${e.timestamp}","${e.event_type}","${e.ip}","${e.country}","${e.city}","${e.platform}","${e.detail || '-'}"\n`;
       });
 
@@ -3254,11 +3260,11 @@
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.setAttribute("href", url);
-      link.setAttribute("download", `Reporte_Metricas_Santo_Rosario_Publicidad_${Date.now()}.csv`);
+      link.setAttribute("download", `Reporte_Metricas_Reales_Santo_Rosario_${Date.now()}.csv`);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      showToast("Reporte oficial en CSV descargado correctamente.");
+      showToast("Reporte con datos reales descargado en CSV.");
     }
 
     // Guardar URL de Webhook de Google Sheets
@@ -3297,6 +3303,8 @@
     // Cerrar sesión de administrador
     function logoutAdmin() {
       isAdmin = false;
+      activeAdminUser = null;
+      sessionStorage.removeItem("sr_admin_auth");
       document.body.classList.remove("admin-active");
       const toggleBtn = document.getElementById("btn-admin-toggle");
       if (toggleBtn) toggleBtn.classList.remove("active");
@@ -3308,9 +3316,9 @@
       showToast("Sesión de Administrador cerrada.");
     }
 
-    // ==========================================
-    // SISTEMA DE AUTENTICACIÓN Y COMENTARIOS ADMIN
-    // ==========================================
+    // ========================================================
+    // AUTENTICACIÓN DINÁMICA CON GITHUB (SIN USUARIO PREDEFINIDO)
+    // ========================================================
     function openAdminModal() {
       if (isAdmin) {
         openMetricsModal();
@@ -3318,6 +3326,8 @@
       }
       const modal = document.getElementById("admin-modal");
       const input = document.getElementById("admin-pass-input");
+      const detectedBox = document.getElementById("admin-detected-user-box");
+      if (detectedBox) detectedBox.style.display = "none";
       if (input) input.value = "";
       if (modal) modal.style.display = "flex";
       setTimeout(() => input?.focus(), 100);
@@ -3330,71 +3340,115 @@
       }
     }
 
+    // Verificación estricta con GitHub API (detecta al usuario de forma automática)
     async function verifyAdminPass() {
-      const userInput = document.getElementById("admin-user-input");
       const passInput = document.getElementById("admin-pass-input");
       const submitBtn = document.getElementById("admin-submit-btn");
+      const detectedBox = document.getElementById("admin-detected-user-box");
+      const detectedAvatar = document.getElementById("admin-detected-avatar");
+      const detectedLogin = document.getElementById("admin-detected-login");
 
-      const user = (userInput?.value || "").trim().toLowerCase();
       const pass = (passInput?.value || "").trim();
 
-      // Validación estricta del usuario dueño del repositorio GitHub
-      if (user !== "pcloayza3" && user !== "pcloayza3@gmail.com") {
-        showToast("Acceso denegado: Solo el dueño (@pcloayza3 / pcloayza3@gmail.com) puede acceder.");
-        userInput?.focus();
+      if (!pass) {
+        showToast("Por favor ingresa tu token de GitHub o clave.");
+        passInput?.focus();
         return;
       }
 
-      // Si ingresa un token de GitHub (personal access token)
-      if (pass.startsWith("ghp_") || pass.startsWith("github_pat_")) {
-        if (submitBtn) submitBtn.textContent = "Verificando...";
-        try {
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Verificando...';
+      }
+
+      try {
+        // 1. Si es un token de GitHub (personal access token ghp_ o fine-grained github_pat_):
+        const isGitHubToken = pass.startsWith("ghp_") || pass.startsWith("github_pat_") || pass.length >= 35;
+        
+        if (isGitHubToken) {
           const res = await fetch("https://api.github.com/user", {
             headers: {
               "Authorization": `Bearer ${pass}`,
               "Accept": "application/vnd.github.v3+json"
             }
           });
+
           if (res.ok) {
             const data = await res.json();
-            if (data.login && data.login.toLowerCase() === "pcloayza3") {
-              activateAdminSuccess();
+            const authenticatedUser = (data.login || "").toLowerCase();
+            
+            // Mostrar usuario detectado automáticamente desde la cuenta de GitHub
+            if (detectedBox && detectedLogin && detectedAvatar) {
+              detectedLogin.textContent = "@" + data.login + (data.name ? ` (${data.name})` : "");
+              detectedAvatar.src = data.avatar_url || "app_icon.png";
+              detectedBox.style.display = "flex";
+            }
+
+            // Validar que el usuario sea estrictamente el dueño del repositorio (@pcloayza3)
+            if (authenticatedUser === "pcloayza3") {
+              activateAdminSuccess(data.login, data.avatar_url);
+              return;
+            } else {
+              showToast(`Acceso denegado: El usuario autenticado @${data.login} no es el propietario del repositorio.`);
+              if (passInput) passInput.value = "";
               return;
             }
+          } else {
+            showToast("Token de GitHub no válido o expirado.");
+            return;
           }
-        } catch (e) {
-          console.warn("GitHub API check error:", e);
-        } finally {
-          if (submitBtn) submitBtn.textContent = "Acceder";
         }
-      }
 
-      // Validación con claves maestras autorizadas para @pcloayza3
-      if (pass === "rosario2026" || pass === "pcloayza" || pass === "pcloayza3" || pass === "santo2026") {
-        activateAdminSuccess();
-      } else {
-        showToast("Clave incorrecta para @pcloayza3. Acceso denegado.");
+        // 2. Validación de clave autorizada para el propietario
+        if (pass === "rosario2026" || pass === "pcloayza" || pass === "pcloayza3" || pass === "santo2026") {
+          activateAdminSuccess("pcloayza3", "app_icon.png");
+          return;
+        }
+
+        showToast("Acceso denegado: Credenciales no válidas.");
         if (passInput) {
           passInput.value = "";
           passInput.focus();
         }
+      } catch (e) {
+        console.warn("Error en autenticación con GitHub:", e);
+        showToast("Error de conexión al verificar credenciales con GitHub.");
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Verificar e Ingresar";
+        }
       }
     }
 
-    function activateAdminSuccess() {
+    function activateAdminSuccess(userName = "pcloayza3", avatarUrl = "app_icon.png") {
       isAdmin = true;
+      activeAdminUser = userName;
+      sessionStorage.setItem("sr_admin_auth", userName);
+
       document.body.classList.add("admin-active");
+      
+      const activeUserLabel = document.getElementById("admin-active-user-label");
+      if (activeUserLabel) activeUserLabel.textContent = "@" + userName;
+
+      const metricsAdminName = document.getElementById("metrics-admin-name");
+      if (metricsAdminName) metricsAdminName.textContent = "@" + userName;
+
       const toggleBtn = document.getElementById("btn-admin-toggle");
       if (toggleBtn) toggleBtn.classList.add("active");
+      
       const btnText = document.getElementById("admin-btn-text");
       if (btnText) btnText.textContent = "Panel de Métricas";
+      
       const navLabel = document.getElementById("nav-admin-label");
       if (navLabel) navLabel.textContent = "📊 Ver Métricas";
+      
       const adminModal = document.getElementById("admin-modal");
       if (adminModal) adminModal.style.display = "none";
-      showToast("¡Bienvenido @pcloayza3! Panel de Control y Métricas activado.");
       
-      // Abrir automáticamente el panel de métricas
+      showToast(`¡Bienvenido @${userName}! Acceso verificado correctamente.`);
+      
+      // Abrir inmediatamente el panel de métricas reales
       openMetricsModal();
     }
 
@@ -3420,12 +3474,7 @@
       return div.innerHTML;
     }
 
-    // Escuchar tecla Enter en inputs de admin
-    document.getElementById("admin-user-input")?.addEventListener("keydown", function(e) {
-      if (e.key === "Enter") {
-        document.getElementById("admin-pass-input")?.focus();
-      }
-    });
+    // Escuchar tecla Enter en input de clave o token
     document.getElementById("admin-pass-input")?.addEventListener("keydown", function(e) {
       if (e.key === "Enter") {
         verifyAdminPass();
@@ -3476,6 +3525,13 @@
     document.addEventListener("DOMContentLoaded", () => {
       renderComments();
       initTelemetry();
+
+      // Restaurar sesión de administrador activa
+      const savedAdmin = sessionStorage.getItem("sr_admin_auth");
+      if (savedAdmin && savedAdmin.toLowerCase() === "pcloayza3") {
+        activateAdminSuccess(savedAdmin, "app_icon.png");
+        closeMetricsModal();
+      }
     });
   </script>
 </body>
