@@ -1684,18 +1684,18 @@
           </p>
 
           <div class="qr-link-box">
-            <span class="qr-link-url" id="page-url">https://pcloayza3.github.io/santo-rosario/</span>
+            <span class="qr-link-url" id="page-url">https://pcloayza3.github.io/santo-rosario/app/</span>
             <button class="btn-copy" onclick="copyPageUrl()">
               <i class="fa-solid fa-copy"></i> <span id="copy-text">Copiar</span>
             </button>
           </div>
 
           <div class="qr-actions">
-            <a href="https://api.whatsapp.com/send?text=%C2%A1Te%20regalamos%20un%20Rosario%20Virtual!%20%F0%9F%99%8F%E2%9C%A8%0A%0ASi%20nunca%20has%20rezado%20el%20Santo%20Rosario%20o%20no%20sabes%20c%C3%B3mo%20hacerlo%2C%20con%20esta%20aplicaci%C3%B3n%20ser%C3%A1s%20todo%20un%20maestro.%20Solo%20necesitamos%20tu%20voluntad%20y%20tu%20fe.%0A%0AIngresa%20y%20descarga%20gratis%20aqu%C3%AD%3A%0Ahttps%3A%2F%2Fpcloayza3.github.io%2Fsanto-rosario%2F" 
+            <a href="https://api.whatsapp.com/send?text=%C2%A1Te%20regalamos%20un%20Rosario%20Virtual!%20%F0%9F%99%8F%E2%9C%A8%0A%0ASi%20nunca%20has%20rezado%20el%20Santo%20Rosario%20o%20no%20sabes%20c%C3%B3mo%20hacerlo%2C%20con%20esta%20aplicaci%C3%B3n%20ser%C3%A1s%20todo%20un%20maestro.%20Solo%20necesitamos%20tu%20voluntad%20y%20tu%20fe.%0A%0AIngresa%20directo%20a%20la%20App%20aqu%C3%AD%3A%0Ahttps%3A%2F%2Fpcloayza3.github.io%2Fsanto-rosario%2Fapp%2F" 
                target="_blank" class="btn-share btn-share-whatsapp">
               <i class="fa-brands fa-whatsapp"></i> Compartir en WhatsApp
             </a>
-            <a href="https://t.me/share/url?url=https://pcloayza3.github.io/santo-rosario/&text=%C2%A1Santo%20Rosario%20Universal!%20Aplicaci%C3%B3n%20cat%C3%B3lica%20para%20rezar%20el%20Santo%20Rosario" 
+            <a href="https://t.me/share/url?url=https://pcloayza3.github.io/santo-rosario/app/&text=%C2%A1Santo%20Rosario%20Universal!%20Aplicaci%C3%B3n%20cat%C3%B3lica%20para%20rezar%20el%20Santo%20Rosario" 
                target="_blank" class="btn-share btn-share-telegram">
               <i class="fa-brands fa-telegram"></i> Compartir en Telegram
             </a>
@@ -1740,35 +1740,8 @@
 
       <div class="platforms-grid">
 
-        <!-- 1. Web en Cualquier Navegador (ACCESO INMEDIATO SIN DESCARGAS) -->
+        <!-- 1. Android Móvil / Tablet (PRIMERO) -->
         <div class="platform-card featured">
-          <span class="card-badge badge-primary">Acceso Inmediato</span>
-          <div class="platform-header">
-            <div class="platform-icon icon-web">
-              <i class="fa-solid fa-globe"></i>
-            </div>
-            <div>
-              <h3 class="platform-title">Web en Cualquier Navegador</h3>
-              <small style="color: var(--text-muted);">Sin descargas ni instalaciones • Carga al instante</small>
-            </div>
-          </div>
-          <p class="platform-desc">
-            Accede al rezo en vivo directamente desde cualquier navegador (Chrome, Safari, Edge, Firefox) en cualquier celular, computadora o tablet sin ocupar memoria.
-          </p>
-          <div class="platform-steps">
-            <strong>Acceso directo:</strong>
-            <ol>
-              <li>Toca el botón "Rezar Ahora en Línea".</li>
-              <li>Comienza a rezar de inmediato con todas las perlas y lecturas.</li>
-            </ol>
-          </div>
-          <a href="app/" target="_blank" class="platform-btn primary" onclick="trackUserAction('ingreso_app', 'Web Navegador', 'Rezar Ahora en Línea')">
-            <i class="fa-solid fa-arrow-up-right-from-square"></i> Rezar Ahora en Línea
-          </a>
-        </div>
-
-        <!-- 2. Android Móvil / Tablet -->
-        <div class="platform-card">
           <span class="card-badge badge-gold">Funciona Offline</span>
           <div class="platform-header">
             <div class="platform-icon icon-android">
@@ -1790,13 +1763,14 @@
               <li>Si tu móvil lo solicita, permite instalar desde esta fuente.</li>
             </ol>
           </div>
-          <a href="SantoRosario.apk" download="SantoRosario.apk" class="platform-btn secondary" onclick="trackUserAction('instalacion_apk', 'Android APK', 'Descarga APK para Celular')">
+          <a href="SantoRosario.apk" download="SantoRosario.apk" class="platform-btn primary" onclick="trackUserAction('instalacion_apk', 'Android APK', 'Descarga APK para Celular')">
             <i class="fa-solid fa-download"></i> Descargar APK para Android
           </a>
         </div>
 
-        <!-- 3. iPhone / iPad (iOS) -->
+        <!-- 2. iPhone / iPad (iOS) (SEGUNDO) -->
         <div class="platform-card">
+          <span class="card-badge badge-primary">iOS App</span>
           <div class="platform-header">
             <div class="platform-icon icon-apple">
               <i class="fa-brands fa-apple"></i>
@@ -1820,6 +1794,33 @@
           </div>
           <a href="app/" target="_blank" class="platform-btn secondary" onclick="trackUserAction('ingreso_app', 'iOS Safari PWA', 'Abrir en iPhone / Safari')">
             <i class="fa-solid fa-mobile-screen-button"></i> Abrir en iPhone / Safari
+          </a>
+        </div>
+
+        <!-- 3. Web en Cualquier Navegador (TERCERO) -->
+        <div class="platform-card">
+          <span class="card-badge badge-primary">Acceso Inmediato</span>
+          <div class="platform-header">
+            <div class="platform-icon icon-web">
+              <i class="fa-solid fa-globe"></i>
+            </div>
+            <div>
+              <h3 class="platform-title">Web en Cualquier Navegador</h3>
+              <small style="color: var(--text-muted);">Sin descargas ni instalaciones • Carga al instante</small>
+            </div>
+          </div>
+          <p class="platform-desc">
+            Accede al rezo en vivo directamente desde cualquier navegador (Chrome, Safari, Edge, Firefox) en cualquier celular, computadora o tablet sin ocupar memoria.
+          </p>
+          <div class="platform-steps">
+            <strong>Acceso directo:</strong>
+            <ol>
+              <li>Toca el botón "Rezar Ahora en Línea".</li>
+              <li>Comienza a rezar de inmediato con todas las perlas y lecturas.</li>
+            </ol>
+          </div>
+          <a href="app/" target="_blank" class="platform-btn secondary" onclick="trackUserAction('ingreso_app', 'Web Navegador', 'Rezar Ahora en Línea')">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> Rezar Ahora en Línea
           </a>
         </div>
 
@@ -2580,8 +2581,8 @@
   </div>
 
   <script>
-    // Generación dinámica del Código QR oficial
-    const targetUrl = "https://pcloayza3.github.io/santo-rosario/";
+    // Generación dinámica del Código QR oficial (directo a la APP)
+    const targetUrl = "https://pcloayza3.github.io/santo-rosario/app/";
     const qrContainer = document.getElementById("qrcode");
 
     const qr = new QRCode(qrContainer, {
