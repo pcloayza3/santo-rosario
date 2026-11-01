@@ -1,14 +1,41 @@
 {
-  "version": 1,
+  "version": 2,
   "sponsors": [
     {
-      "id": "promo_disponible",
+      "id": "libro_nuevo_credo",
       "active": true,
-      "name": "Espacio publicitario para Patrocinador",
-      "tagline": "Anuncia aquí tu emprendimiento, librería, servicio u obra y llega a miles de fieles devotos.",
-      "action_text": "Patrocinar aquí",
-      "target_url": "https://pcloayza3.github.io/santo-rosario/",
-      "badge": "ESPACIO DISPONIBLE"
+      "badge": "LIBRO RECOMENDADO",
+      "name": "Nuevo Credo",
+      "tagline": "La síntesis de la Razón, el Espíritu y la Física Cuántica",
+      "action_text": "Ver en Amazon",
+      "target_url": "https://www.amazon.com",
+      "logo_url": "https://pcloayza3.github.io/santo-rosario/images/nuevo_credo_es.jpg",
+      "i18n": {
+        "es": {
+          "badge": "LIBRO RECOMENDADO",
+          "name": "Nuevo Credo",
+          "tagline": "La síntesis de la Razón, el Espíritu y la Física Cuántica",
+          "action_text": "Ver en Amazon",
+          "target_url": "https://www.amazon.com",
+          "logo_url": "https://pcloayza3.github.io/santo-rosario/images/nuevo_credo_es.jpg"
+        },
+        "en": {
+          "badge": "FEATURED BOOK",
+          "name": "The New Creed",
+          "tagline": "The synthesis of Reason, Spirit, and Quantum Physics",
+          "action_text": "View on Amazon",
+          "target_url": "https://www.amazon.com",
+          "logo_url": "https://pcloayza3.github.io/santo-rosario/images/new_creed_en.jpg"
+        },
+        "pt": {
+          "badge": "LIVRO RECOMENDADO",
+          "name": "The New Creed",
+          "tagline": "The synthesis of Reason, Spirit, and Quantum Physics",
+          "action_text": "Ver na Amazon",
+          "target_url": "https://www.amazon.com",
+          "logo_url": "https://pcloayza3.github.io/santo-rosario/images/new_creed_en.jpg"
+        }
+      }
     }
   ]
 }
