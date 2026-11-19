@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "sponsors": [
     {
       "id": "libro_nuevo_credo",
@@ -8,7 +8,7 @@
       "name": "Nuevo Credo",
       "tagline": "La síntesis de la Razón, el Espíritu y la Física Cuántica",
       "action_text": "Ver en Amazon",
-      "target_url": "https://www.amazon.com",
+      "target_url": "https://www.amazon.com/dp/B0HQ3FHTXB",
       "logo_url": "https://pcloayza3.github.io/santo-rosario/images/banner_nuevo_credo_es.jpg",
       "i18n": {
         "es": {
@@ -16,7 +16,7 @@
           "name": "Nuevo Credo",
           "tagline": "La síntesis de la Razón, el Espíritu y la Física Cuántica",
           "action_text": "Ver en Amazon",
-          "target_url": "https://www.amazon.com",
+          "target_url": "https://www.amazon.com/dp/B0HQ3FHTXB",
           "logo_url": "https://pcloayza3.github.io/santo-rosario/images/banner_nuevo_credo_es.jpg"
         },
         "en": {
@@ -24,7 +24,7 @@
           "name": "The New Creed",
           "tagline": "The synthesis of Reason, Spirit, and Quantum Physics",
           "action_text": "View on Amazon",
-          "target_url": "https://www.amazon.com",
+          "target_url": "https://www.amazon.com/dp/B0HQ3BQTCQ",
           "logo_url": "https://pcloayza3.github.io/santo-rosario/images/banner_new_creed_en.jpg"
         },
         "pt": {
@@ -32,7 +32,7 @@
           "name": "The New Creed",
           "tagline": "The synthesis of Reason, Spirit, and Quantum Physics",
           "action_text": "Ver na Amazon",
-          "target_url": "https://www.amazon.com",
+          "target_url": "https://www.amazon.com/dp/B0HQ3BQTCQ",
           "logo_url": "https://pcloayza3.github.io/santo-rosario/images/banner_new_creed_en.jpg"
         }
       }
